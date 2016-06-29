@@ -6,8 +6,6 @@
 //  Copyright © 2016 DeltaApps. All rights reserved.
 //
 
-import Foundation
-
 import XCTest
 @testable import DataStructures
 
