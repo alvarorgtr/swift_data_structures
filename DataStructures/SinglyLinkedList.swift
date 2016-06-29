@@ -13,17 +13,25 @@ public struct SinglyLinkedList<T>: SequenceType {
 	
 	private var head: Node<T>?
 	
+	public private(set) var count: Int = 0
+	
+	public var isEmpty: Bool {
+		return head == nil
+	}
+	
 	public init() {
 		
 	}
 	
 	public mutating func pushFront(value: T) {
 		head = Node(value: value, next: head)
+		count += 1
 	}
 	
 	public mutating func popFront() -> T {
 		if let h = head {
 			head = h.next
+			count -= 1
 			return h.value
 		} else {
 			fatalError("Cannot pop an empty list")
@@ -59,11 +67,8 @@ public struct SinglyLinkedListGenerator<T>: GeneratorType {
 	}
 	
 	public mutating func next() -> SinglyLinkedListGenerator.Element? {
-		if let old = node {
-			node = old.next
-			return node?.value
-		} else {
-			preconditionFailure("Trying to get the next element of an iterator pointing to the last one")
-		}
+		let value = node?.value
+		node = node?.next
+		return value
 	}
 }

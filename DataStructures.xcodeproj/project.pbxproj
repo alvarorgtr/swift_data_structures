@@ -72,6 +72,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		382D94A71D248C9B00773F31 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				38F7A2911D248A060087EF51 /* ProgrammerAssertions.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		38B0D08B1D23F1A0004C04BE = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +104,7 @@
 				38B0D0981D23F1A0004C04BE /* DataStructures.h */,
 				38B0D09A1D23F1A0004C04BE /* Info.plist */,
 				382895431D2467D60051C294 /* SinglyLinkedList.swift */,
-				38F7A2911D248A060087EF51 /* ProgrammerAssertions.swift */,
+				382D94A71D248C9B00773F31 /* Helpers */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
