@@ -10,6 +10,14 @@
 		38B0D0991D23F1A0004C04BE /* DataStructures.h in Headers */ = {isa = PBXBuildFile; fileRef = 38B0D0981D23F1A0004C04BE /* DataStructures.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38B0D0A01D23F1A1004C04BE /* DataStructures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B0D0951D23F1A0004C04BE /* DataStructures.framework */; };
 		38B0D0A51D23F1A1004C04BE /* DataStructuresTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0A41D23F1A1004C04BE /* DataStructuresTests.swift */; };
+		38B0D0B01D240121004C04BE /* DoublyLinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0AF1D240121004C04BE /* DoublyLinkedListTests.swift */; };
+		38B0D0B21D24012F004C04BE /* SinglyLinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0B11D24012F004C04BE /* SinglyLinkedListTests.swift */; };
+		38B0D0B41D240278004C04BE /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0B31D240278004C04BE /* QueueTests.swift */; };
+		38B0D0B61D24028B004C04BE /* StackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0B51D24028B004C04BE /* StackTests.swift */; };
+		38B0D0B81D240298004C04BE /* DequeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0B71D240298004C04BE /* DequeTests.swift */; };
+		38B0D0BA1D2402C0004C04BE /* BinaryTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0B91D2402C0004C04BE /* BinaryTreeTests.swift */; };
+		38B0D0BC1D2402CC004C04BE /* BinarySearchTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0BB1D2402CC004C04BE /* BinarySearchTreeTests.swift */; };
+		38B0D0BE1D2402D8004C04BE /* TreeMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0BD1D2402D8004C04BE /* TreeMapTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +37,14 @@
 		38B0D09F1D23F1A1004C04BE /* DataStructuresTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataStructuresTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B0D0A41D23F1A1004C04BE /* DataStructuresTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructuresTests.swift; sourceTree = "<group>"; };
 		38B0D0A61D23F1A1004C04BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38B0D0AF1D240121004C04BE /* DoublyLinkedListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoublyLinkedListTests.swift; sourceTree = "<group>"; };
+		38B0D0B11D24012F004C04BE /* SinglyLinkedListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglyLinkedListTests.swift; sourceTree = "<group>"; };
+		38B0D0B31D240278004C04BE /* QueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
+		38B0D0B51D24028B004C04BE /* StackTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackTests.swift; sourceTree = "<group>"; };
+		38B0D0B71D240298004C04BE /* DequeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DequeTests.swift; sourceTree = "<group>"; };
+		38B0D0B91D2402C0004C04BE /* BinaryTreeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTreeTests.swift; sourceTree = "<group>"; };
+		38B0D0BB1D2402CC004C04BE /* BinarySearchTreeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearchTreeTests.swift; sourceTree = "<group>"; };
+		38B0D0BD1D2402D8004C04BE /* TreeMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeMapTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +96,16 @@
 		38B0D0A31D23F1A1004C04BE /* DataStructuresTests */ = {
 			isa = PBXGroup;
 			children = (
-				38B0D0A41D23F1A1004C04BE /* DataStructuresTests.swift */,
 				38B0D0A61D23F1A1004C04BE /* Info.plist */,
+				38B0D0A41D23F1A1004C04BE /* DataStructuresTests.swift */,
+				38B0D0AF1D240121004C04BE /* DoublyLinkedListTests.swift */,
+				38B0D0B11D24012F004C04BE /* SinglyLinkedListTests.swift */,
+				38B0D0B31D240278004C04BE /* QueueTests.swift */,
+				38B0D0B51D24028B004C04BE /* StackTests.swift */,
+				38B0D0B71D240298004C04BE /* DequeTests.swift */,
+				38B0D0B91D2402C0004C04BE /* BinaryTreeTests.swift */,
+				38B0D0BB1D2402CC004C04BE /* BinarySearchTreeTests.swift */,
+				38B0D0BD1D2402D8004C04BE /* TreeMapTests.swift */,
 			);
 			path = DataStructuresTests;
 			sourceTree = "<group>";
@@ -148,6 +172,7 @@
 				TargetAttributes = {
 					38B0D0941D23F1A0004C04BE = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = H4S9C994K7;
 					};
 					38B0D09E1D23F1A1004C04BE = {
 						CreatedOnToolsVersion = 7.3;
@@ -201,7 +226,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38B0D0BA1D2402C0004C04BE /* BinaryTreeTests.swift in Sources */,
+				38B0D0BE1D2402D8004C04BE /* TreeMapTests.swift in Sources */,
+				38B0D0B61D24028B004C04BE /* StackTests.swift in Sources */,
 				38B0D0A51D23F1A1004C04BE /* DataStructuresTests.swift in Sources */,
+				38B0D0B81D240298004C04BE /* DequeTests.swift in Sources */,
+				38B0D0BC1D2402CC004C04BE /* BinarySearchTreeTests.swift in Sources */,
+				38B0D0B21D24012F004C04BE /* SinglyLinkedListTests.swift in Sources */,
+				38B0D0B01D240121004C04BE /* DoublyLinkedListTests.swift in Sources */,
+				38B0D0B41D240278004C04BE /* QueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,12 +343,14 @@
 		38B0D0AA1D23F1A1004C04BE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = DataStructures/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DeltaApps.DataStructures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -326,12 +361,14 @@
 		38B0D0AB1D23F1A1004C04BE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = DataStructures/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DeltaApps.DataStructures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
