@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		382895441D2467D60051C294 /* SinglyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382895431D2467D60051C294 /* SinglyLinkedList.swift */; };
 		38B0D0991D23F1A0004C04BE /* DataStructures.h in Headers */ = {isa = PBXBuildFile; fileRef = 38B0D0981D23F1A0004C04BE /* DataStructures.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38B0D0A01D23F1A1004C04BE /* DataStructures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B0D0951D23F1A0004C04BE /* DataStructures.framework */; };
 		38B0D0A51D23F1A1004C04BE /* DataStructuresTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0A41D23F1A1004C04BE /* DataStructuresTests.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		382895431D2467D60051C294 /* SinglyLinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglyLinkedList.swift; sourceTree = "<group>"; };
 		38B0D0951D23F1A0004C04BE /* DataStructures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataStructures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B0D0981D23F1A0004C04BE /* DataStructures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataStructures.h; sourceTree = "<group>"; };
 		38B0D09A1D23F1A0004C04BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			children = (
 				38B0D0981D23F1A0004C04BE /* DataStructures.h */,
 				38B0D09A1D23F1A0004C04BE /* Info.plist */,
+				382895431D2467D60051C294 /* SinglyLinkedList.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				382895441D2467D60051C294 /* SinglyLinkedList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +347,7 @@
 		38B0D0AA1D23F1A1004C04BE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -355,12 +360,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = DeltaApps.DataStructures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		38B0D0AB1D23F1A1004C04BE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -415,6 +422,7 @@
 				38B0D0AB1D23F1A1004C04BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		38B0D0AC1D23F1A1004C04BE /* Build configuration list for PBXNativeTarget "DataStructuresTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +431,7 @@
 				38B0D0AE1D23F1A1004C04BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
