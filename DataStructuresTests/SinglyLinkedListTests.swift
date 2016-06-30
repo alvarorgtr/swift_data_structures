@@ -49,7 +49,7 @@ class SinglyLinkedListTests: XCTestCase {
 		var count = 0
 		
 		for i in list {
-			XCTAssertEqual(i, count, "The \(count)th popped element must be \(count) (while iterating)")
+			XCTAssertEqual(i, count, "The \(count)th element must be \(count) (while iterating)")
 			count += 1
 		}
 	}
@@ -68,5 +68,47 @@ class SinglyLinkedListTests: XCTestCase {
 
 		XCTAssert(list.isEmpty, "The list should be empty")
 		XCTAssertEqual(list.count, 0, "Also the list should have no elements")
+	}
+	
+	func testArrayLiteralConvertible() {
+		let list: SinglyLinkedList<Int> = [0, 1, 2, 3]
+		var count = 0
+		
+		for i in list {
+			XCTAssertEqual(i, count, "The \(count)th element must be \(count)")
+			count += 1
+		}
+	}
+	
+	func testRepeatedValueInit() {
+		let list = SinglyLinkedList<Int>(count: 10, repeatedValue: 2)
+		
+		XCTAssertEqual(list.count, 10, "There should be 10 values")
+		XCTAssertEqual(list.front(), 2, "The first value should be 2")
+	}
+	
+	func testOtherSequenceInit() {
+		let otherList: SinglyLinkedList<Int> = [0, 1, 2, 3]
+		let list = SinglyLinkedList<Int>(otherList)
+		var count = 0
+		
+		for i in list {
+			XCTAssertEqual(i, count, "The \(count)th element must be \(count)")
+			count += 1
+		}
+		
+		count = 0
+		let list2 = SinglyLinkedList<Int>(0...3)
+		for i in list2 {
+			XCTAssertEqual(i, count, "The \(count)th element must be \(count)")
+			count += 1
+		}
+	}
+	
+	func testPoppingEmptyList() {
+		var list = SinglyLinkedList<Int>()
+		expectFatalError { 
+			list.popFront()
+		}
 	}
 }
