@@ -8,93 +8,179 @@
 
 import Foundation
 
+/**
+An implementation of a linked list whose nodes only have a
+pointer to the next node.
+*/
 public struct SinglyLinkedList<Element>: SequenceType, ArrayLiteralConvertible {
-	public typealias Generator = SinglyLinkedListGenerator<Element>
+	public typealias Generator = AnyGenerator<Element>
+	private typealias Node = SinglyLinkedListNode<Element>
 	
-	private var head: Node<Element>?
+	private var head: Node?
 	
+	/// The number of elements currently on the list.
 	public private(set) var count: Int = 0
 	
+	/// True if the list is empty, false otherwise.
 	public var isEmpty: Bool {
 		return head == nil
 	}
 	
+	
+	// MARK: Initializers
+	/**
+	Creates an empty singly linked list.
+	*/
 	public init() {
 		
 	}
 	
+	/**
+	Creates a list with the elements on the provided sequence.
+	
+	- parameter s: the sequence the elements will be drawn from.
+	
+	- complexity: O(n) where n is the number of elements in the sequence.
+	*/
 	public init<S: SequenceType where S.Generator.Element == Element>(_ s: S) {
 		var generator = s.generate()
-		var node: Node<Element>?
+		var node: Node?
 		
 		if let first = generator.next() {
 			head = Node(value: first, next: nil)
 			node = head
+			count = 1
 		}
 		
 		while let next = generator.next() {
 			node!.next = Node(value: next, next: nil)
 			node = node!.next
+			count += 1
 		}
 	}
 	
 	public init(arrayLiteral elements: Element...) {
 		for element in elements.reverse() {
-			pushFront(element)
+			prepend(element)
 		}
 	}
 	
+	/**
+	Creates a list with the provided element repeated.
+	
+	- parameter count:         the number of repetitions.
+	- parameter repeatedValue: the value to be repeated.
+	*/
 	public init(count: Int, repeatedValue: Element) {
 		for _ in 0..<count {
-			pushFront(repeatedValue)
+			prepend(repeatedValue)
 		}
 	}
 	
 	
-	public mutating func pushFront(value: Element) {
+	// MARK: Accessors and mutators
+	/**
+	Adds an element to the head of the list.
+	
+	- parameter value: the element to be added.
+	
+	- complexity: O(1)
+	*/
+	public mutating func prepend(value: Element) {
 		head = Node(value: value, next: head)
 		count += 1
 	}
 	
-	public mutating func popFront() -> Element {
+	/**
+	Delete the element on the head of the list.
+	
+	- returns: the element which was deleted.
+	
+	- complexity: O(1)
+	*/
+	public mutating func deleteFirst() -> Element {
 		if let h = head {
 			head = h.next
 			count -= 1
 			return h.value
 		} else {
-			fatalError("Cannot pop an empty list")
+			fatalError("Cannot delete in an empty list")
 		}
 	}
 	
-	public func front() -> Element? {
+	/**
+	Obtain the first element on the list (the head).
+	
+	- returns: the element.
+	
+	- complexity: O(1)
+	*/
+	public func first() -> Element? {
 		return head?.value
 	}
 	
 	
+	// MARK: Iteration
 	public func generate() -> SinglyLinkedList.Generator {
-		return SinglyLinkedListGenerator<Element>(node: head)
+		return AnyGenerator(SinglyLinkedListGenerator<Element>(node: head))
 	}
 }
 
+extension SinglyLinkedList: CustomStringConvertible {
+	public var description: String {
+		var desc = "["
+		let generator = generate()
+		
+		if let first = generator.next() {
+			desc += String(first)
+		}
+		
+		while let element = generator.next() {
+			desc += ", " + String(element)
+		}
+		desc += "]"
+		return desc
+	}
+}
 
-private class Node<Element> {
-	private var next: Node<Element>?
+public func ==<T: Equatable>(lhs: SinglyLinkedList<T>, rhs: SinglyLinkedList<T>) -> Bool {
+	if lhs.count != rhs.count {
+		return false
+	} else {
+		if lhs.count == 0 || lhs.head === rhs.head {
+			return true
+		} else {
+			var result = true
+			let leftGenerator = lhs.generate()
+			let rightGenerator = rhs.generate()
+			
+			while let l = leftGenerator.next(), r = rightGenerator.next() {
+				result = result && (l == r)
+			}
+			
+			return result
+		}
+	}
+}
+
+private class SinglyLinkedListNode<Element> {
+	private var next: SinglyLinkedListNode<Element>?
 	private var value: Element
 	
-	private init(value: Element, next: Node<Element>? = nil) {
+	private init(value: Element, next: SinglyLinkedListNode<Element>? = nil) {
 		self.value = value
 		self.next = next
 	}
 }
 
-public struct SinglyLinkedListGenerator<Element>: GeneratorType {
-		private var node: Node<Element>?
+private struct SinglyLinkedListGenerator<Element>: GeneratorType {
+	private var node: SinglyLinkedListNode<Element>?
 	
-	private init(node: Node<Element>?) {
+	private init(node: SinglyLinkedListNode<Element>?) {
 		self.node = node
 	}
 	
-	public mutating func next() -> Element? {
+	private mutating func next() -> Element? {
 		let value = node?.value
 		node = node?.next
 		return value
