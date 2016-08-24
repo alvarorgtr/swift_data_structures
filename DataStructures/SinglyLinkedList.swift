@@ -43,16 +43,16 @@ public struct SinglyLinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
 	- complexity: O(n) where n is the number of elements in the sequence.
 	*/
 	public init<S: Sequence>(_ s: S) where S.Iterator.Element == Element {
-		var generator = s.makeIterator()
+		var iterator = s.makeIterator()
 		var node: Node?
 		
-		if let first = generator.next() {
+		if let first = iterator.next() {
 			head = Node(value: first, next: nil)
 			node = head
 			count = 1
 		}
 		
-		while let next = generator.next() {
+		while let next = iterator.next() {
 			node!.next = Node(value: next, next: nil)
 			node = node!.next
 			count += 1
@@ -98,7 +98,7 @@ public struct SinglyLinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
 	
 	- complexity: O(1)
 	*/
-	public mutating func deleteFirst() -> Element {
+	@discardableResult public mutating func deleteFirst() -> Element {
 		if let h = head {
 			head = h.next
 			count -= 1
@@ -122,21 +122,21 @@ public struct SinglyLinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
 	
 	// MARK: Iteration
 	public func makeIterator() -> SinglyLinkedList.Iterator {
-		return AnyIterator(SinglyLinkedListGenerator<Element>(node: head))
+		return AnyIterator(SinglyLinkedListIterator<Element>(node: head))
 	}
 }
 
 extension SinglyLinkedList: CustomStringConvertible {
 	public var description: String {
 		var desc = "["
-		let generator = makeIterator()
+		let iterator = makeIterator()
 		
-		if let first = generator.next() {
-			desc += String(first)
+		if let first = iterator.next() {
+			desc += String(describing: first)
 		}
 		
-		while let element = generator.next() {
-			desc += ", " + String(element)
+		while let element = iterator.next() {
+			desc += ", " + String(describing: element)
 		}
 		desc += "]"
 		return desc
@@ -151,10 +151,10 @@ public func ==<T: Equatable>(lhs: SinglyLinkedList<T>, rhs: SinglyLinkedList<T>)
 			return true
 		} else {
 			var result = true
-			let leftGenerator = lhs.makeIterator()
-			let rightGenerator = rhs.makeIterator()
+			let leftIterator = lhs.makeIterator()
+			let rightIterator = rhs.makeIterator()
 			
-			while let l = leftGenerator.next(), let r = rightGenerator.next() {
+			while let l = leftIterator.next(), let r = rightIterator.next() {
 				result = result && (l == r)
 			}
 			
@@ -173,7 +173,7 @@ private class SinglyLinkedListNode<Element> {
 	}
 }
 
-private struct SinglyLinkedListGenerator<Element>: IteratorProtocol {
+private struct SinglyLinkedListIterator<Element>: IteratorProtocol {
 	fileprivate var node: SinglyLinkedListNode<Element>?
 	
 	fileprivate init(node: SinglyLinkedListNode<Element>?) {

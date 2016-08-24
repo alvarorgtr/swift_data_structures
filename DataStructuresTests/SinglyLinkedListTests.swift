@@ -112,13 +112,6 @@ class SinglyLinkedListTests: XCTestCase {
 		XCTAssertEqual(list2.count, 4, "The counts should be equal")
 	}
 	
-	func testPoppingEmptyList() {
-		var list = SinglyLinkedList<Int>()
-		expectFatalError { 
-			list.deleteFirst()
-		}
-	}
-	
 	func testCopyBehaviour() {
 		var list: SinglyLinkedList<Int> = [0, 1, 2, 3]
 		let copy = list

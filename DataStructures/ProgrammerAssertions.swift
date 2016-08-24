@@ -37,12 +37,12 @@ public func precondition(_ condition: @autoclosure () -> Bool, _ message: @autoc
 
 public func preconditionFailure(_ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) -> Never  {
     Assertions.preconditionFailureClosure(message(), file, line)
-    runForever()
+    // runForever()
 }
 
 public func fatalError(_ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) -> Never  {
     Assertions.fatalErrorClosure(message(), file, line)
-    runForever()
+    // runForever()
 }
 
 /// Stores custom assertions closures, by default it points to Swift functions. But test target can override them.

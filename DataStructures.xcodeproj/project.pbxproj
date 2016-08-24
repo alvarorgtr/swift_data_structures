@@ -20,7 +20,6 @@
 		38B0D0BA1D2402C0004C04BE /* BinaryTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0B91D2402C0004C04BE /* BinaryTreeTests.swift */; };
 		38B0D0BC1D2402CC004C04BE /* BinarySearchTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0BB1D2402CC004C04BE /* BinarySearchTreeTests.swift */; };
 		38B0D0BE1D2402D8004C04BE /* TreeMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0BD1D2402D8004C04BE /* TreeMapTests.swift */; };
-		38F7A28E1D2489DB0087EF51 /* XCTestCase+ProgrammerAssertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F7A28D1D2489DB0087EF51 /* XCTestCase+ProgrammerAssertions.swift */; };
 		38F7A2921D248A060087EF51 /* ProgrammerAssertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F7A2911D248A060087EF51 /* ProgrammerAssertions.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +50,6 @@
 		38B0D0B91D2402C0004C04BE /* BinaryTreeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTreeTests.swift; sourceTree = "<group>"; };
 		38B0D0BB1D2402CC004C04BE /* BinarySearchTreeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearchTreeTests.swift; sourceTree = "<group>"; };
 		38B0D0BD1D2402D8004C04BE /* TreeMapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeMapTests.swift; sourceTree = "<group>"; };
-		38F7A28D1D2489DB0087EF51 /* XCTestCase+ProgrammerAssertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+ProgrammerAssertions.swift"; sourceTree = "<group>"; };
 		38F7A2911D248A060087EF51 /* ProgrammerAssertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammerAssertions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,17 +123,8 @@
 				38B0D0B91D2402C0004C04BE /* BinaryTreeTests.swift */,
 				38B0D0BB1D2402CC004C04BE /* BinarySearchTreeTests.swift */,
 				38B0D0BD1D2402D8004C04BE /* TreeMapTests.swift */,
-				38F7A28F1D2489DF0087EF51 /* Helpers */,
 			);
 			path = DataStructuresTests;
-			sourceTree = "<group>";
-		};
-		38F7A28F1D2489DF0087EF51 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				38F7A28D1D2489DB0087EF51 /* XCTestCase+ProgrammerAssertions.swift */,
-			);
-			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,7 +184,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = DeltaApps;
 				TargetAttributes = {
 					38B0D0941D23F1A0004C04BE = {
@@ -262,7 +251,6 @@
 				38B0D0BA1D2402C0004C04BE /* BinaryTreeTests.swift in Sources */,
 				38B0D0BE1D2402D8004C04BE /* TreeMapTests.swift in Sources */,
 				38B0D0B61D24028B004C04BE /* StackTests.swift in Sources */,
-				38F7A28E1D2489DB0087EF51 /* XCTestCase+ProgrammerAssertions.swift in Sources */,
 				38B0D0A51D23F1A1004C04BE /* DataStructuresTests.swift in Sources */,
 				38B0D0B81D240298004C04BE /* DequeTests.swift in Sources */,
 				38B0D0BC1D2402CC004C04BE /* BinarySearchTreeTests.swift in Sources */,
@@ -297,8 +285,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -346,8 +336,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -367,6 +359,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -379,6 +372,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H4S9C994K7;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -401,6 +395,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H4S9C994K7;
 				DYLIB_COMPATIBILITY_VERSION = 1;

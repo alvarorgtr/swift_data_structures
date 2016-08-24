@@ -54,7 +54,7 @@ public struct List<Element>: Sequence, ExpressibleByArrayLiteral {
 		count += 1
 	}
 	
-	public mutating func deleteFirst() -> Element {
+	@discardableResult public mutating func deleteFirst() -> Element {
 		if let oldHead = head {
 			if let next = oldHead.next {
 				next.previous = nil
@@ -88,7 +88,7 @@ public struct List<Element>: Sequence, ExpressibleByArrayLiteral {
 		count += 1
 	}
 	
-	public mutating func deleteLast() -> Element {
+	@discardableResult public mutating func deleteLast() -> Element {
 		if let oldTail = tail {
 			if let previous = oldTail.previous {
 				previous.next = nil
@@ -111,18 +111,18 @@ public struct List<Element>: Sequence, ExpressibleByArrayLiteral {
 	
 	
 	public func makeIterator() -> List.Iterator {
-		return AnyIterator(ListGenerator<Element>(node: head))
+		return AnyIterator(ListIterator<Element>(node: head))
 	}
 	
-	public func generateReverse() -> List.Iterator {
-		return AnyIterator(ReverseListGenerator<Element>(node: tail))
+	public func makeReverseIterator() -> List.Iterator {
+		return AnyIterator(ReverseListIterator<Element>(node: tail))
 	}
 	
 	public func reverse() -> [List.Iterator.Element] {
-		let gen = generateReverse()
+		let it = makeReverseIterator()
 		var result = [Element]()
 		
-		while let element = gen.next() {
+		while let element = it.next() {
 			result.append(element)
 		}
 		
@@ -133,14 +133,14 @@ public struct List<Element>: Sequence, ExpressibleByArrayLiteral {
 extension List: CustomStringConvertible {
 	public var description: String {
 		var desc = "["
-		let generator = makeIterator()
+		let iterator = makeIterator()
 		
-		if let first = generator.next() {
-			desc += String(first)
+		if let first = iterator.next() {
+			desc += String(describing: first)
 		}
 		
-		while let element = generator.next() {
-			desc += ", " + String(element)
+		while let element = iterator.next() {
+			desc += ", " + String(describing: element)
 		}
 		desc += "]"
 		return desc
@@ -155,10 +155,10 @@ public func ==<T: Equatable>(lhs: List<T>, rhs: List<T>) -> Bool {
 			return true
 		} else {
 			var result = true
-			let leftGenerator = lhs.makeIterator()
-			let rightGenerator = rhs.makeIterator()
+			let leftIterator = lhs.makeIterator()
+			let rightIterator = rhs.makeIterator()
 			
-			while let l = leftGenerator.next(), let r = rightGenerator.next() {
+			while let l = leftIterator.next(), let r = rightIterator.next() {
 				result = result && (l == r)
 			}
 			
@@ -179,7 +179,7 @@ private class ListNode<Element> {
 	}
 }
 
-private struct ListGenerator<Element>: IteratorProtocol {
+private struct ListIterator<Element>: IteratorProtocol {
 	fileprivate var node: ListNode<Element>?
 	
 	fileprivate init(node: ListNode<Element>?) {
@@ -193,7 +193,7 @@ private struct ListGenerator<Element>: IteratorProtocol {
 	}
 }
 
-private struct ReverseListGenerator<Element>: IteratorProtocol {
+private struct ReverseListIterator<Element>: IteratorProtocol {
 	fileprivate var node: ListNode<Element>?
 	
 	fileprivate init(node: ListNode<Element>?) {

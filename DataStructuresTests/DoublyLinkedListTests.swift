@@ -110,7 +110,7 @@ class DoublyLinkedListTests: XCTestCase {
 		
 		var count = 0
 		
-		for element in list.generateReverse() {
+		for element in list.makeReverseIterator() {
 			XCTAssertEqual(element, count, "The \(count)th element must be \(count) (while iterating)")
 			count += 1
 		}
@@ -183,17 +183,6 @@ class DoublyLinkedListTests: XCTestCase {
 			count += 1
 		}
 		XCTAssertEqual(list2.count, 4, "The counts should be equal")
-	}
-	
-	func testPoppingEmptyList() {
-		var list = List<Int>()
-		expectFatalError {
-			list.deleteFirst()
-		}
-		
-		expectFatalError {
-			list.deleteLast()
-		}
 	}
 	
 	func testCopyBehaviour() {
