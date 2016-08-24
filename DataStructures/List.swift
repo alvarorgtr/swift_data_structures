@@ -8,14 +8,14 @@
 
 import Foundation
 
-public struct List<Element>: SequenceType, ArrayLiteralConvertible {
-	public typealias Generator = AnyGenerator<Element>
-	private typealias Node = ListNode<Element>
+public struct List<Element>: Sequence, ExpressibleByArrayLiteral {
+	public typealias Iterator = AnyIterator<Element>
+	fileprivate typealias Node = ListNode<Element>
 	
-	private var head: Node?
-	private var tail: Node?
+	fileprivate var head: Node?
+	fileprivate var tail: Node?
 	
-	public private(set) var count: Int = 0
+	public fileprivate(set) var count: Int = 0
 	
 	public var isEmpty: Bool {
 		return head == nil
@@ -25,7 +25,7 @@ public struct List<Element>: SequenceType, ArrayLiteralConvertible {
 		
 	}
 	
-	public init<S: SequenceType where S.Generator.Element == Element>(_ s: S) {
+	public init<S: Sequence>(_ s: S) where S.Iterator.Element == Element {
 		for element in s {
 			append(element)
 		}
@@ -42,7 +42,7 @@ public struct List<Element>: SequenceType, ArrayLiteralConvertible {
 	}
 	
 	
-	public mutating func prepend(value: Element) {
+	public mutating func prepend(_ value: Element) {
 		let newHead = Node(value: value, next: head)
 		if let head = head {
 			head.previous = newHead
@@ -76,7 +76,7 @@ public struct List<Element>: SequenceType, ArrayLiteralConvertible {
 	}
 	
 	
-	public mutating func append(value: Element) {
+	public mutating func append(_ value: Element) {
 		let newTail = Node(value: value, previous: tail)
 		if let tail = tail {
 			tail.next = newTail
@@ -110,15 +110,15 @@ public struct List<Element>: SequenceType, ArrayLiteralConvertible {
 	}
 	
 	
-	public func generate() -> List.Generator {
-		return AnyGenerator(ListGenerator<Element>(node: head))
+	public func makeIterator() -> List.Iterator {
+		return AnyIterator(ListGenerator<Element>(node: head))
 	}
 	
-	public func generateReverse() -> List.Generator {
-		return AnyGenerator(ReverseListGenerator<Element>(node: tail))
+	public func generateReverse() -> List.Iterator {
+		return AnyIterator(ReverseListGenerator<Element>(node: tail))
 	}
 	
-	public func reverse() -> [List.Generator.Element] {
+	public func reverse() -> [List.Iterator.Element] {
 		let gen = generateReverse()
 		var result = [Element]()
 		
@@ -133,7 +133,7 @@ public struct List<Element>: SequenceType, ArrayLiteralConvertible {
 extension List: CustomStringConvertible {
 	public var description: String {
 		var desc = "["
-		let generator = generate()
+		let generator = makeIterator()
 		
 		if let first = generator.next() {
 			desc += String(first)
@@ -155,10 +155,10 @@ public func ==<T: Equatable>(lhs: List<T>, rhs: List<T>) -> Bool {
 			return true
 		} else {
 			var result = true
-			let leftGenerator = lhs.generate()
-			let rightGenerator = rhs.generate()
+			let leftGenerator = lhs.makeIterator()
+			let rightGenerator = rhs.makeIterator()
 			
-			while let l = leftGenerator.next(), r = rightGenerator.next() {
+			while let l = leftGenerator.next(), let r = rightGenerator.next() {
 				result = result && (l == r)
 			}
 			
@@ -168,39 +168,39 @@ public func ==<T: Equatable>(lhs: List<T>, rhs: List<T>) -> Bool {
 }
 
 private class ListNode<Element> {
-	private var next: ListNode<Element>?
-	private weak var previous: ListNode<Element>?
-	private var value: Element
+	fileprivate var next: ListNode<Element>?
+	fileprivate weak var previous: ListNode<Element>?
+	fileprivate var value: Element
 	
-	private init(value: Element, previous: ListNode<Element>? = nil, next: ListNode<Element>? = nil) {
+	fileprivate init(value: Element, previous: ListNode<Element>? = nil, next: ListNode<Element>? = nil) {
 		self.value = value
 		self.next = next
 		self.previous = previous
 	}
 }
 
-private struct ListGenerator<Element>: GeneratorType {
-	private var node: ListNode<Element>?
+private struct ListGenerator<Element>: IteratorProtocol {
+	fileprivate var node: ListNode<Element>?
 	
-	private init(node: ListNode<Element>?) {
+	fileprivate init(node: ListNode<Element>?) {
 		self.node = node
 	}
 	
-	private mutating func next() -> Element? {
+	fileprivate mutating func next() -> Element? {
 		let value = node?.value
 		node = node?.next
 		return value
 	}
 }
 
-private struct ReverseListGenerator<Element>: GeneratorType {
-	private var node: ListNode<Element>?
+private struct ReverseListGenerator<Element>: IteratorProtocol {
+	fileprivate var node: ListNode<Element>?
 	
-	private init(node: ListNode<Element>?) {
+	fileprivate init(node: ListNode<Element>?) {
 		self.node = node
 	}
 	
-	private mutating func next() -> Element? {
+	fileprivate mutating func next() -> Element? {
 		let value = node?.value
 		node = node?.previous
 		return value

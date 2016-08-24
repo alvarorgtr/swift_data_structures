@@ -12,14 +12,14 @@ import Foundation
 An implementation of a linked list whose nodes only have a
 pointer to the next node.
 */
-public struct SinglyLinkedList<Element>: SequenceType, ArrayLiteralConvertible {
-	public typealias Generator = AnyGenerator<Element>
-	private typealias Node = SinglyLinkedListNode<Element>
+public struct SinglyLinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
+	public typealias Iterator = AnyIterator<Element>
+	fileprivate typealias Node = SinglyLinkedListNode<Element>
 	
-	private var head: Node?
+	fileprivate var head: Node?
 	
 	/// The number of elements currently on the list.
-	public private(set) var count: Int = 0
+	public fileprivate(set) var count: Int = 0
 	
 	/// True if the list is empty, false otherwise.
 	public var isEmpty: Bool {
@@ -42,8 +42,8 @@ public struct SinglyLinkedList<Element>: SequenceType, ArrayLiteralConvertible {
 	
 	- complexity: O(n) where n is the number of elements in the sequence.
 	*/
-	public init<S: SequenceType where S.Generator.Element == Element>(_ s: S) {
-		var generator = s.generate()
+	public init<S: Sequence>(_ s: S) where S.Iterator.Element == Element {
+		var generator = s.makeIterator()
 		var node: Node?
 		
 		if let first = generator.next() {
@@ -60,7 +60,7 @@ public struct SinglyLinkedList<Element>: SequenceType, ArrayLiteralConvertible {
 	}
 	
 	public init(arrayLiteral elements: Element...) {
-		for element in elements.reverse() {
+		for element in elements.reversed() {
 			prepend(element)
 		}
 	}
@@ -86,7 +86,7 @@ public struct SinglyLinkedList<Element>: SequenceType, ArrayLiteralConvertible {
 	
 	- complexity: O(1)
 	*/
-	public mutating func prepend(value: Element) {
+	public mutating func prepend(_ value: Element) {
 		head = Node(value: value, next: head)
 		count += 1
 	}
@@ -121,15 +121,15 @@ public struct SinglyLinkedList<Element>: SequenceType, ArrayLiteralConvertible {
 	
 	
 	// MARK: Iteration
-	public func generate() -> SinglyLinkedList.Generator {
-		return AnyGenerator(SinglyLinkedListGenerator<Element>(node: head))
+	public func makeIterator() -> SinglyLinkedList.Iterator {
+		return AnyIterator(SinglyLinkedListGenerator<Element>(node: head))
 	}
 }
 
 extension SinglyLinkedList: CustomStringConvertible {
 	public var description: String {
 		var desc = "["
-		let generator = generate()
+		let generator = makeIterator()
 		
 		if let first = generator.next() {
 			desc += String(first)
@@ -151,10 +151,10 @@ public func ==<T: Equatable>(lhs: SinglyLinkedList<T>, rhs: SinglyLinkedList<T>)
 			return true
 		} else {
 			var result = true
-			let leftGenerator = lhs.generate()
-			let rightGenerator = rhs.generate()
+			let leftGenerator = lhs.makeIterator()
+			let rightGenerator = rhs.makeIterator()
 			
-			while let l = leftGenerator.next(), r = rightGenerator.next() {
+			while let l = leftGenerator.next(), let r = rightGenerator.next() {
 				result = result && (l == r)
 			}
 			
@@ -164,23 +164,23 @@ public func ==<T: Equatable>(lhs: SinglyLinkedList<T>, rhs: SinglyLinkedList<T>)
 }
 
 private class SinglyLinkedListNode<Element> {
-	private var next: SinglyLinkedListNode<Element>?
-	private var value: Element
+	fileprivate var next: SinglyLinkedListNode<Element>?
+	fileprivate var value: Element
 	
-	private init(value: Element, next: SinglyLinkedListNode<Element>? = nil) {
+	fileprivate init(value: Element, next: SinglyLinkedListNode<Element>? = nil) {
 		self.value = value
 		self.next = next
 	}
 }
 
-private struct SinglyLinkedListGenerator<Element>: GeneratorType {
-	private var node: SinglyLinkedListNode<Element>?
+private struct SinglyLinkedListGenerator<Element>: IteratorProtocol {
+	fileprivate var node: SinglyLinkedListNode<Element>?
 	
-	private init(node: SinglyLinkedListNode<Element>?) {
+	fileprivate init(node: SinglyLinkedListNode<Element>?) {
 		self.node = node
 	}
 	
-	private mutating func next() -> Element? {
+	fileprivate mutating func next() -> Element? {
 		let value = node?.value
 		node = node?.next
 		return value
