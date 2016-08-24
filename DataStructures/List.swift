@@ -8,8 +8,9 @@
 
 import Foundation
 
-public struct List<Element>: Sequence, ExpressibleByArrayLiteral {
-	public typealias Iterator = AnyIterator<Element>
+public struct List<Element>: RandomAccessCollection, ExpressibleByArrayLiteral {
+	public typealias Iterator = ListIterator<Element>
+	public typealias Index = ListIndex<Element>
 	fileprivate typealias Node = ListNode<Element>
 	
 	fileprivate var head: Node?
@@ -21,13 +22,35 @@ public struct List<Element>: Sequence, ExpressibleByArrayLiteral {
 		return head == nil
 	}
 	
+	// MARK: Index requirements
+	public var startIndex: Index {
+		return Index(node: head)
+	}
+	
+	public var endIndex: Index {
+		return Index(node: nil)
+	}
+	
+	public func index(after i: Index) -> Index {
+		return i.successor()
+	}
+	
+	public func index(before i: Index) -> Index {
+		if i.node == nil {
+			return Index(node: tail)
+		} else {
+			return i.predecessor()
+		}
+	}
+	
+	// MARK: Initializers
 	public init() {
 		
 	}
 	
 	public init<S: Sequence>(_ s: S) where S.Iterator.Element == Element {
 		for element in s {
-			append(element)
+			appendLast(element)
 		}
 	}
 	
@@ -37,12 +60,35 @@ public struct List<Element>: Sequence, ExpressibleByArrayLiteral {
 	
 	public init(count: Int, repeatedValue: Element) {
 		for _ in 0..<count {
-			prepend(repeatedValue)
+			appendLast(repeatedValue)
 		}
 	}
 	
+	// MARK: Subscripting	
+	public subscript(position: Index) -> Element {
+		set {
+			changeNode(newValue: newValue, position: position)
+		}
+		
+		get {
+			guard let node = position.node else {
+				fatalError("List index out of bounds")
+			}
+			
+			return node.value
+		}
+	}
 	
-	public mutating func prepend(_ value: Element) {
+	private func changeNode(newValue: Element, position: Index) {
+		if position.node != nil {
+			position.node!.value = newValue
+		} else {
+			fatalError("List index out of bounds")
+		}
+	}
+	
+	// MARK: Mutators & accessors
+	public mutating func appendFirst(_ value: Element) {
 		let newHead = Node(value: value, next: head)
 		if let head = head {
 			head.previous = newHead
@@ -53,8 +99,20 @@ public struct List<Element>: Sequence, ExpressibleByArrayLiteral {
 		
 		count += 1
 	}
+
+	public mutating func appendLast(_ value: Element) {
+		let newTail = Node(value: value, previous: tail)
+		if let tail = tail {
+			tail.next = newTail
+		} else {
+			head = newTail
+		}
+		tail = newTail
+		
+		count += 1
+	}
 	
-	@discardableResult public mutating func deleteFirst() -> Element {
+	@discardableResult public mutating func removeFirst() -> Element {
 		if let oldHead = head {
 			if let next = oldHead.next {
 				next.previous = nil
@@ -67,28 +125,11 @@ public struct List<Element>: Sequence, ExpressibleByArrayLiteral {
 			
 			return oldHead.value
 		} else {
-			fatalError("Cannot delete in an empty list")
+			fatalError("Cannot remove elements from an empty list")
 		}
 	}
 	
-	public func first() -> Element? {
-		return head?.value
-	}
-	
-	
-	public mutating func append(_ value: Element) {
-		let newTail = Node(value: value, previous: tail)
-		if let tail = tail {
-			tail.next = newTail
-		} else {
-			head = newTail
-		}
-		tail = newTail
-		
-		count += 1
-	}
-	
-	@discardableResult public mutating func deleteLast() -> Element {
+	@discardableResult public mutating func removeLast() -> Element {
 		if let oldTail = tail {
 			if let previous = oldTail.previous {
 				previous.next = nil
@@ -101,39 +142,21 @@ public struct List<Element>: Sequence, ExpressibleByArrayLiteral {
 			
 			return oldTail.value
 		} else {
-			fatalError("Cannot delete in an empty list")
+			fatalError("Cannot remove elements from an empty list")
 		}
 	}
 	
-	public func last() -> Element? {
-		return tail?.value
-	}
-	
-	
+	// MARK: Iteration
 	public func makeIterator() -> List.Iterator {
-		return AnyIterator(ListIterator<Element>(node: head))
-	}
-	
-	public func makeReverseIterator() -> List.Iterator {
-		return AnyIterator(ReverseListIterator<Element>(node: tail))
-	}
-	
-	public func reverse() -> [List.Iterator.Element] {
-		let it = makeReverseIterator()
-		var result = [Element]()
-		
-		while let element = it.next() {
-			result.append(element)
-		}
-		
-		return result
+		return ListIterator<Element>(node: head)
 	}
 }
 
+// MARK: - List extensions
 extension List: CustomStringConvertible {
 	public var description: String {
 		var desc = "["
-		let iterator = makeIterator()
+		var iterator = makeIterator()
 		
 		if let first = iterator.next() {
 			desc += String(describing: first)
@@ -155,8 +178,8 @@ public func ==<T: Equatable>(lhs: List<T>, rhs: List<T>) -> Bool {
 			return true
 		} else {
 			var result = true
-			let leftIterator = lhs.makeIterator()
-			let rightIterator = rhs.makeIterator()
+			var leftIterator = lhs.makeIterator()
+			var rightIterator = rhs.makeIterator()
 			
 			while let l = leftIterator.next(), let r = rightIterator.next() {
 				result = result && (l == r)
@@ -167,6 +190,7 @@ public func ==<T: Equatable>(lhs: List<T>, rhs: List<T>) -> Bool {
 	}
 }
 
+// MARK: - Node
 private class ListNode<Element> {
 	fileprivate var next: ListNode<Element>?
 	fileprivate weak var previous: ListNode<Element>?
@@ -179,20 +203,72 @@ private class ListNode<Element> {
 	}
 }
 
-private struct ListIterator<Element>: IteratorProtocol {
+// MARK: - Index
+public class ListIndex<Element>: Comparable {
 	fileprivate var node: ListNode<Element>?
 	
 	fileprivate init(node: ListNode<Element>?) {
 		self.node = node
 	}
 	
-	fileprivate mutating func next() -> Element? {
+	public func successor() -> ListIndex<Element> {
+		return ListIndex<Element>(node: node?.next)
+	}
+	
+	public func predecessor() -> ListIndex<Element> {
+		return ListIndex<Element>(node: node?.previous)
+	}
+}
+
+public func ==<T>(lhs: ListIndex<T>, rhs: ListIndex<T>) -> Bool {
+	return lhs.node === rhs.node
+}
+
+public func <<T>(lhs: ListIndex<T>, rhs: ListIndex<T>) -> Bool {
+	if lhs.node === rhs.node {
+		return false
+	}
+	
+	if lhs.node == nil {
+		return false
+	}
+	
+	if rhs.node == nil {
+		return true
+	}
+	
+	var result = false
+	var next = lhs.successor()
+	
+	while next.node != nil && !result {
+		if next.node === rhs.node {
+			result = true
+		}
+		
+		next = next.successor()
+	}
+	
+	return result
+}
+
+// MARK: - Iterators
+public struct ListIterator<T>: IteratorProtocol {
+	public typealias Element = T
+
+	fileprivate var node: ListNode<T>?
+	
+	fileprivate init(node: ListNode<T>?) {
+		self.node = node
+	}
+	
+	public mutating func next() -> T? {
 		let value = node?.value
 		node = node?.next
 		return value
 	}
 }
 
+/*
 private struct ReverseListIterator<Element>: IteratorProtocol {
 	fileprivate var node: ListNode<Element>?
 	
@@ -205,4 +281,4 @@ private struct ReverseListIterator<Element>: IteratorProtocol {
 		node = node?.previous
 		return value
 	}
-}
+}*/

@@ -23,19 +23,19 @@ class DoublyLinkedListTests: XCTestCase {
 	
 	func testCreation() {
 		var list = List<Int>()
-		list.prepend(2)
+		list.appendFirst(2)
 		XCTAssertEqual(list.count, 1, "Correct element count")
 	}
 	
-	func testPrepend() {
+	func testAppendFirst() {
 		var list = List<Int>()
-		list.prepend(3)
-		list.prepend(2)
-		list.prepend(1)
-		list.prepend(0)
+		list.appendFirst(3)
+		list.appendFirst(2)
+		list.appendFirst(1)
+		list.appendFirst(0)
 		
 		for i in 0...3 {
-			XCTAssertEqual(list.deleteFirst(), i, "The \(i)th popped element must be \(i)")
+			XCTAssertEqual(list.removeFirst(), i, "The \(i)th popped element must be \(i)")
 		}
 		
 		XCTAssertEqual(list.count, 0, "The list must be empty at the end")
@@ -43,13 +43,13 @@ class DoublyLinkedListTests: XCTestCase {
 	
 	func testAppend() {
 		var list = List<Int>()
-		list.append(3)
-		list.append(2)
-		list.append(1)
-		list.append(0)
+		list.appendLast(3)
+		list.appendLast(2)
+		list.appendLast(1)
+		list.appendLast(0)
 		
 		for i in 0...3 {
-			XCTAssertEqual(list.deleteLast(), i, "The \(i)th popped element must be \(i)")
+			XCTAssertEqual(list.removeLast(), i, "The \(i)th popped element must be \(i)")
 		}
 		
 		XCTAssertEqual(list.count, 0, "The list must be empty at the end")
@@ -60,39 +60,39 @@ class DoublyLinkedListTests: XCTestCase {
 		
 		XCTAssertEqual(list.description, "[]", "An empty list's description should be \"[]\"")
 		
-		list.prepend(3)
-		list.prepend(2)
-		list.prepend(1)
-		list.prepend(0)
+		list.appendFirst(3)
+		list.appendFirst(2)
+		list.appendFirst(1)
+		list.appendFirst(0)
 		
 		XCTAssertEqual(list.description, "[0, 1, 2, 3]", "The list should be of the form \"[0, 1, 2, 3]\"")
 	}
 	
-	func testAppendAndPrepend() {
+	func testAppendAndRemoveFirstAndLast() {
 		var list = List<Int>()
-		list.append(0)
-		list.append(1)
-		list.prepend(-1)
-		list.deleteLast()
-		list.deleteFirst()
+		list.appendLast(0)
+		list.appendLast(1)
+		list.appendFirst(-1)
+		list.removeLast()
+		list.removeFirst()
 		
 		XCTAssertEqual(list.description, "[0]", "The list should be of the form \"[0]\"")
 		
-		list.prepend(-2)
-		list.append(2)
-		list.deleteLast()
-		list.deleteLast()
-		list.append(3)
+		list.appendFirst(-2)
+		list.appendLast(2)
+		list.removeLast()
+		list.removeLast()
+		list.appendLast(3)
 		
 		XCTAssertEqual(list.description, "[-2, 3]", "The list should be of the form \"[-2, 3]\"")
 	}
 	
 	func testIteration() {
 		var list = List<Int>()
-		list.prepend(3)
-		list.prepend(2)
-		list.prepend(1)
-		list.prepend(0)
+		list.appendFirst(3)
+		list.appendFirst(2)
+		list.appendFirst(1)
+		list.appendFirst(0)
 		var count = 0
 		
 		for i in list {
@@ -101,31 +101,16 @@ class DoublyLinkedListTests: XCTestCase {
 		}
 	}
 	
-	func testReverseIteration() {
-		var list = List<Int>()
-		list.prepend(0)
-		list.prepend(1)
-		list.prepend(2)
-		list.prepend(3)
-		
-		var count = 0
-		
-		for element in list.makeReverseIterator() {
-			XCTAssertEqual(element, count, "The \(count)th element must be \(count) (while iterating)")
-			count += 1
-		}
-	}
-	
 	func testReverseFunction() {
 		var list = List<Int>()
-		list.prepend(0)
-		list.prepend(1)
-		list.prepend(2)
-		list.prepend(3)
+		list.appendFirst(0)
+		list.appendFirst(1)
+		list.appendFirst(2)
+		list.appendFirst(3)
 		
 		var count = 0
 		
-		for element in list.reverse() {
+		for element in list.reversed() {
 			XCTAssertEqual(element, count, "The \(count)th element must be \(count) (while iterating)")
 			count += 1
 		}
@@ -133,15 +118,15 @@ class DoublyLinkedListTests: XCTestCase {
 	
 	func testEmptiness() {
 		var list = List<Int>()
-		list.prepend(2)
-		list.prepend(-1)
+		list.appendFirst(2)
+		list.appendFirst(-1)
 		
 		XCTAssert(!list.isEmpty, "The list shouldn't be empty")
 		
-		list.deleteFirst()
-		list.prepend(23)
-		list.deleteFirst()
-		list.deleteFirst()
+		list.removeFirst()
+		list.appendFirst(23)
+		list.removeFirst()
+		list.removeFirst()
 		
 		XCTAssert(list.isEmpty, "The list should be empty")
 		XCTAssertEqual(list.count, 0, "Also the list should have no elements")
@@ -161,8 +146,8 @@ class DoublyLinkedListTests: XCTestCase {
 		let list = List<Int>(count: 10, repeatedValue: 2)
 		
 		XCTAssertEqual(list.count, 10, "There should be 10 values")
-		XCTAssertEqual(list.first(), 2, "The first value should be 2")
-		XCTAssertEqual(list.last(), 2, "The last value should be 2")
+		XCTAssertEqual(list.first, 2, "The first value should be 2")
+		XCTAssertEqual(list.last, 2, "The last value should be 2")
 	}
 	
 	func testOtherSequenceInit() {
@@ -189,7 +174,7 @@ class DoublyLinkedListTests: XCTestCase {
 		var list: List<Int> = [0, 1, 2, 3]
 		let copy = list
 		
-		list.deleteFirst()
+		list.removeFirst()
 		
 		XCTAssertEqual(list.description, "[1, 2, 3]", "The first element should have disappeared")
 		XCTAssertEqual(list.count, 3)
@@ -202,4 +187,6 @@ class DoublyLinkedListTests: XCTestCase {
 		XCTAssert(list == list, "Equality should be transitive")
 		XCTAssert(list == List<Int>([0, 1, 2, 3]), "The list should be equal to another list with the same elements")
 	}
+	
+	// FIXME: Missing: test collection behaviour & indexes (esp. comparability)
 }
