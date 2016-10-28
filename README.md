@@ -10,6 +10,7 @@ Basic list of structures to be implemented:
   - Stack
   - Deque (double ended queue)
 - Trees:
-  - Binary tree
   - Binary search tree
   - Tree map
+    - AVL tree map
+    - Left-leaning red-black tree map 
