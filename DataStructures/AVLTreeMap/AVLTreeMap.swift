@@ -3,7 +3,11 @@ import Foundation
 public struct AVLTreeMap<Key: Comparable, Value>: ExpressibleByDictionaryLiteral {
 	internal typealias Node = AVLTreeNode<Key, Value>
 
-	internal var root: Node?
+	internal var root: Node? {
+		didSet {
+			root?.parent = nil
+		}
+	}
 
 	// We save references for nodes for startIndex & endIndex
 	internal var startNode: Node?
@@ -254,6 +258,8 @@ extension AVLTreeMap {
 		guard let node = currNode else {
 			return
 		}
+		
+		node.updateHeight()
 
 		if (node.rightChild?.height ?? -1) - (node.leftChild?.height ?? -1) > 1 {
 			if (node.rightChild?.leftChild?.height ?? -1) > (node.rightChild?.rightChild?.height ?? -1) {
@@ -261,8 +267,6 @@ extension AVLTreeMap {
 			} else {
 				rotateLeft(&currNode!)
 			}
-		} else {
-			node.updateHeight()
 		}
 	}
 
@@ -270,6 +274,8 @@ extension AVLTreeMap {
 		guard let node = currNode else {
 			return
 		}
+		
+		node.updateHeight()
 
 		if (node.leftChild?.height ?? -1) - (node.rightChild?.height ?? -1) > 1 {
 			if (node.leftChild?.rightChild?.height ?? -1) > (node.leftChild?.leftChild?.height ?? -1) {
@@ -277,8 +283,6 @@ extension AVLTreeMap {
 			} else {
 				rotateRight(&currNode!)
 			}
-		} else {
-			node.updateHeight()
 		}
 	}
 
@@ -324,8 +328,8 @@ extension AVLTreeMap {
 
 	private mutating func rotateRightLeft(_ node: inout Node) {
 		precondition(node.rightChild != nil, "Cannot rotate left right in such a node.")
-		rotateLeft(&node.rightChild!)
-		rotateRight(&node)
+		rotateRight(&node.rightChild!)
+		rotateLeft(&node)
 	}
 }
 
@@ -428,9 +432,7 @@ extension AVLTreeMap: CustomDebugStringConvertible {
 // MARK: Draw in console
 extension AVLTreeMap where Key: CustomStringConvertible {
 	public func log() {
-		for line in drawASCII() {
-			print(line)
-		}
+		root?.log()
 		print("")
 	}
 	
@@ -438,111 +440,120 @@ extension AVLTreeMap where Key: CustomStringConvertible {
 	///
 	/// - returns: The array of lines.
 	public func drawASCII() -> [String] {
-		return drawASCII(fromNode: root)
+		return root?.drawASCII() ?? []
 	}
+}
 
-	// The first returned string is the topmost one
-	private func drawASCII(fromNode node: Node?) -> [String] {
-		guard let node = node else {
-			return []
+extension AVLTreeNode where Key: CustomStringConvertible {
+	internal func log() {
+		for line in drawASCII() {
+			print(line)
 		}
-
-		let nodeString = "(\(node.key))"
-
-		let leftStrings = drawASCII(fromNode: node.leftChild)
-		let rightStrings = drawASCII(fromNode: node.rightChild)
-
+	}
+	
+	// The first returned string is the topmost one
+	internal func drawASCII() -> [String] {
+		let nodeString = "(\(key))"
+		
+		let leftStrings = leftChild?.drawASCII() ?? []
+		let rightStrings = rightChild?.drawASCII() ?? []
+		
 		if leftStrings.count == 0 && rightStrings.count == 0 {
 			return [nodeString]
 		} else if leftStrings.count == 0 {
 			let childSize = rightStrings.first!.characters.count
 			let topLine = makeLine(keyString: nodeString, childSize: childSize, hasLeftBranch: false, hasRightBranch: true)
-
-			return [topLine] + rightStrings.map{ String(repeating: " ", count: childSize + 1) + $0 }
+			
+			return [topLine] + rightStrings.map{ String(repeating: " ", count: ((topLine.characters.count - 1) / 2) + 1) + $0 }
 		} else if rightStrings.count == 0 {
 			let childSize = leftStrings.first!.characters.count
 			let topLine = makeLine(keyString: nodeString, childSize: childSize, hasLeftBranch: true, hasRightBranch: false)
-
-			return [topLine] + leftStrings.map{ $0 + String(repeating: " ", count: childSize + 1) }
+			
+			return [topLine] + leftStrings.map{ $0 + String(repeating: " ", count: ((topLine.characters.count - 1) / 2) + 1) }
 		} else {
 			let leftSize = leftStrings.first!.characters.count
 			let rightSize = rightStrings.first!.characters.count
 			let childSize = leftSize > rightSize ? leftSize : rightSize // Weird error: max(leftSize, rightSize)
 			let topLine = makeLine(keyString: nodeString, childSize: childSize, hasLeftBranch: true, hasRightBranch: true)
-
+			let topChildSize = (topLine.characters.count - 1) / 2
+			
 			let fillToSize: (String, Int) -> String = { (string, size) in
-				if childSize <= size {
+				if topChildSize <= size {
 					return string
 				} else {
-					let diff = childSize - size
+					let diff = topChildSize - size
 					let leftSpace = diff / 2
 					let rightSpace = diff - leftSpace
-
+					
 					return String(repeating: " ", count: leftSpace) + string + String(repeating: " ", count: rightSpace)
 				}
 			}
-
+			
 			var result: [String] = [topLine]
 			let min = leftStrings.count > rightStrings.count ? rightStrings.count : leftStrings.count // Weird error: min(leftStrings.count, rightStrings.count)
 			for i in 0..<min {
 				result.append(fillToSize(leftStrings[i], leftSize) + " " + fillToSize(rightStrings[i], rightSize))
 			}
-
+			
 			let diff = leftStrings.count - rightStrings.count
 			let biggest: [String] = diff > 0 ? leftStrings : rightStrings
 			for i in (biggest.count - abs(diff))..<biggest.count {
 				if diff > 0 {
-					result.append(fillToSize(leftStrings[i], leftSize) + String(repeating: " ", count: childSize + 1))
+					result.append(fillToSize(leftStrings[i], leftSize) + String(repeating: " ", count: topChildSize + 1))
 				} else {
-					result.append(String(repeating: " ", count: childSize + 1) + fillToSize(rightStrings[i], rightSize))
+					result.append(String(repeating: " ", count: topChildSize + 1) + fillToSize(rightStrings[i], rightSize))
 				}
 			}
-
-
+			
+			
 			return result
 		}
 	}
-
-	private func makeLine(keyString: String, childSize: Int, hasLeftBranch: Bool, hasRightBranch: Bool) -> String {
+	
+	private func makeLine(keyString: String, childSize oldChildSize: Int, hasLeftBranch: Bool, hasRightBranch: Bool) -> String {
 		var rightString: String = ""
 		var leftString: String = ""
-
-		let totalSize = 2 * childSize + 1	// TODO: childSize might be < keySize
+		
 		let keySize = keyString.characters.count
+		let childSize = max(oldChildSize, keySize / 2)
+		let totalSize = 2 * childSize + 1
 		let leftSize = childSize - ((keySize - 1) / 2)
 		let rightSize = totalSize - (leftSize + keySize)
 		let spaces = (childSize - 1) / 2
-
+		
 		let spacesString = String(repeating: " ", count: spaces)
 		if hasLeftBranch {
 			leftString = spacesString + "+" + String(repeating: "-", count: leftSize - (spaces + 1))
 		} else {
 			leftString = String(repeating: " ", count: leftSize)
 		}
-
+		
 		if hasRightBranch {
 			rightString = String(repeating: "-", count: rightSize - (spaces + 1)) + "+" + spacesString
 		} else {
 			rightString = String(repeating: " ", count: rightSize)
 		}
-
+		
 		return leftString + keyString + rightString
 	}
+
 }
 
-extension AVLTreeMap {
-	/// - complexity: O(n) where n = min(lhs.count, rhs.count)
-	public static func ==<Key: Comparable, Value: Equatable>(lhs: AVLTreeMap<Key, Value>, rhs: AVLTreeMap<Key, Value>) -> Bool {
-		guard lhs.count == rhs.count else {
+/// - complexity: O(n) where n = min(lhs.count, rhs.count)
+public func ==<Key: Comparable, Value: Equatable>(lhs: AVLTreeMap<Key, Value>, rhs: AVLTreeMap<Key, Value>) -> Bool {
+	guard lhs.count == rhs.count else {
+		return false
+	}
+	
+	print(lhs.count)
+	print(rhs.count)
+	
+	for (leftElement, rightElement) in zip(lhs, rhs) {
+		print("Comparing \(leftElement), \(rightElement)")
+		if leftElement != rightElement {
 			return false
 		}
-		
-		for (leftElement, rightElement) in zip(lhs, rhs) {
-			if leftElement != rightElement {
-				return false
-			}
-		}
-		
-		return true
 	}
+	
+	return true
 }

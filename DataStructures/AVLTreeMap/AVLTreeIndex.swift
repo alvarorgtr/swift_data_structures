@@ -24,11 +24,13 @@ public final class AVLTreeIndex<Key: Comparable, Value> {
 
 	/// - complexity: Amortized O(1)
 	internal func next() -> Index {
+		precondition(node != nil)
 		return Index(node?.next, previous: node)
 	}
 
 	/// - complexity: Amortized O(1)
 	internal func previous() -> Index {
+		precondition(previousNode != nil)
 		return Index(node?.previous, previous: node)
 	}
 }

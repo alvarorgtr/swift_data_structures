@@ -17,7 +17,7 @@ internal final class AVLTreeNode<Key: Comparable, Value> {
 			}
 		}
 	}
-	private(set) internal weak var parent: Node?
+	internal weak var parent: Node?
 
 	var key: Key
 	var value: Value
@@ -38,7 +38,7 @@ internal final class AVLTreeNode<Key: Comparable, Value> {
 				var child = self
 
 				while let parent = child.parent {
-					if parent.isLeftChild(child) {
+					if key < parent.key {
 						newNode = parent
 						break
 					}
@@ -61,7 +61,7 @@ internal final class AVLTreeNode<Key: Comparable, Value> {
 				var child = self
 
 				while let parent = child.parent {
-					if parent.isRightChild(child) {
+					if key > parent.key {
 						newNode = parent
 						break
 					}
