@@ -1,8 +1,4 @@
 import Foundation
-import Glibc
-
-// FIXME: Respect start & endnode when inserting or deleting
-// FIXME: Also count
 
 public struct AVLTreeMap<Key: Comparable, Value>: ExpressibleByDictionaryLiteral {
 	internal typealias Node = AVLTreeNode<Key, Value>
@@ -16,6 +12,7 @@ public struct AVLTreeMap<Key: Comparable, Value>: ExpressibleByDictionaryLiteral
 	fileprivate(set) public var count = 0
 
 	/// The total height of the tree. -1 if empty.
+	/// - complexity: O(log n) where n is the tree count.
 	public var height: Int {
 		return root?.height ?? -1
 	}
@@ -55,6 +52,7 @@ public struct AVLTreeMap<Key: Comparable, Value>: ExpressibleByDictionaryLiteral
 			let node = Node(collection[middle])
 			node.leftChild = subTreeRoot(bounds: bounds.first!..<middle, fromCollection: collection)
 			node.rightChild = subTreeRoot(bounds: (middle + 1)..<(bounds.last! + 1), fromCollection: collection)
+			node.updateHeight()
 			return node
 		}
 	}
@@ -63,9 +61,11 @@ public struct AVLTreeMap<Key: Comparable, Value>: ExpressibleByDictionaryLiteral
 extension AVLTreeMap where Key: Hashable {
 	/**
 	Orders the keys of the dictionary and creates a tree with them.
-	- param dictionary: the source dictionary.
+	
+	- parameter dictionary: the source dictionary.
+	
 	- complexity: O(n log n), where n is the number of elements in the dictionary.
-	**/
+	*/
 	public init(dictionary: [Key: Value]) {
 		self.init()
 		let keysAndValues: [(Key, Value)] = dictionary.keys.map { (key) -> (Key, Value) in (key, dictionary[key]!) }
@@ -81,6 +81,11 @@ extension AVLTreeMap where Key: Hashable {
 }
 
 extension AVLTreeMap {
+	/// Enables subscript access to the value associated with a key.
+	///
+	/// - parameter key: the key the value is associated to.
+	///
+	/// - returns: the associated value.
 	public subscript(key: Key) -> Value? {
 		get {
 			return findNode(forKey: key, fromNode: root)?.value
@@ -98,7 +103,7 @@ extension AVLTreeMap {
 	/**
 	Updates the value associated with the key.
 	- returns: the old associated value
-	**/
+	*/
 	@discardableResult public mutating func update(value: Value, forKey key: Key) -> Value? {
 		if root != nil {
 			if let oldValue = update(value: value, forKey: key, fromNode: &root) {
@@ -159,6 +164,12 @@ extension AVLTreeMap {
 		return nil
 	}
 
+	
+	/// Removes the value associated with a key, and balances the tree if needed.
+	///
+	/// - parameter key: the key whose value we are removing.
+	///
+	/// - returns: the removed value.
 	@discardableResult public mutating func removeValue(forKey key: Key) -> Value? {
 		if root != nil {
 			if let oldValue = removeValue(forKey: key, fromNode: &root) {
@@ -223,7 +234,6 @@ extension AVLTreeMap {
 		}
 	}
 
-	/// - complexity: O(log n)
 	fileprivate func findNode(forKey key: Key, fromNode node: Node?) -> Node? {
 		if let node = node {
 			if key == node.key {
@@ -423,12 +433,15 @@ extension AVLTreeMap where Key: CustomStringConvertible {
 		}
 		print("")
 	}
-
+	
+	/// A series of text lines with an text drawing of the tree.
+	///
+	/// - returns: The array of lines.
 	public func drawASCII() -> [String] {
 		return drawASCII(fromNode: root)
 	}
 
-	// The first string is the topmost one
+	// The first returned string is the topmost one
 	private func drawASCII(fromNode node: Node?) -> [String] {
 		guard let node = node else {
 			return []
@@ -514,5 +527,22 @@ extension AVLTreeMap where Key: CustomStringConvertible {
 		}
 
 		return leftString + keyString + rightString
+	}
+}
+
+extension AVLTreeMap {
+	/// - complexity: O(n) where n = min(lhs.count, rhs.count)
+	public static func ==<Key: Comparable, Value: Equatable>(lhs: AVLTreeMap<Key, Value>, rhs: AVLTreeMap<Key, Value>) -> Bool {
+		guard lhs.count == rhs.count else {
+			return false
+		}
+		
+		for (leftElement, rightElement) in zip(lhs, rhs) {
+			if leftElement != rightElement {
+				return false
+			}
+		}
+		
+		return true
 	}
 }
