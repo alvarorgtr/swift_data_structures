@@ -47,7 +47,23 @@ class AVLTreeMapTests: XCTestCase {
 	}
 	
 	func testDictionaryLiteralConvertible() {
+		let tree: AVLTreeMap<Int, String> = [1: "One", 2: "Two", 3: "Three"]
+		XCTAssertTrue(tree.count == 3 && tree.height == 1, "Wrong creation")
+		XCTAssertEqual(tree.startNode?.key, 1, "Wrong start node")
+		XCTAssertEqual(tree.endNode?.key, 3, "Wrong end node")
+		XCTAssertEqual(tree[2], "Two", "The second value is wrong")
+		XCTAssertAVLTree(tree)
 		
+		let charTree: AVLTreeMap<Character, String> = ["A": "A", "B": "B", "C": "C", "D": "D", "E": "E"]
+		XCTAssertTrue(charTree.count == 3, "Wrong creation")
+		XCTAssertEqual(charTree.startNode?.key, "A", "Wrong start node")
+		XCTAssertEqual(charTree.endNode?.key, "E", "Wrong end node")
+		
+		for i in "ABCDE".characters {
+			XCTAssertEqual(String(i), charTree[i], "Key <\(i)> value is not '\(i)'")
+		}
+		
+		XCTAssertAVLTree(charTree)
 	}
 }
 
