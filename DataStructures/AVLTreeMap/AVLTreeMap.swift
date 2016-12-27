@@ -545,11 +545,7 @@ public func ==<Key: Comparable, Value: Equatable>(lhs: AVLTreeMap<Key, Value>, r
 		return false
 	}
 	
-	print(lhs.count)
-	print(rhs.count)
-	
 	for (leftElement, rightElement) in zip(lhs, rhs) {
-		print("Comparing \(leftElement), \(rightElement)")
 		if leftElement != rightElement {
 			return false
 		}

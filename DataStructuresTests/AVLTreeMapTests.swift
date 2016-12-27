@@ -197,8 +197,6 @@ class AVLTreeMapTests: XCTestCase {
 			tree2[i] = "num\(i)"
 		}
 		
-		tree1.log()
-		tree2.log()
 		XCTAssertTrue(tree1 == tree2, "Two equal trees compare different")
 	}
 }
