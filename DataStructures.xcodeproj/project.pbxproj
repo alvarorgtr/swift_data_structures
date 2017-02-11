@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3824FB7D1E4F557D007AFA7F /* TreeIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3824FB7C1E4F557D007AFA7F /* TreeIterator.swift */; };
+		3824FB7F1E4F5660007AFA7F /* DictionaryCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3824FB7E1E4F5660007AFA7F /* DictionaryCollection.swift */; };
 		38A0AD291DC4AAF1005EA3CC /* AVLTreeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0AD251DC4AAF1005EA3CC /* AVLTreeIndex.swift */; };
 		38A0AD2A1DC4AAF1005EA3CC /* AVLTreeIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0AD261DC4AAF1005EA3CC /* AVLTreeIterator.swift */; };
 		38A0AD2B1DC4AAF1005EA3CC /* AVLTreeMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0AD271DC4AAF1005EA3CC /* AVLTreeMap.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3824FB7C1E4F557D007AFA7F /* TreeIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeIterator.swift; sourceTree = "<group>"; };
+		3824FB7E1E4F5660007AFA7F /* DictionaryCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryCollection.swift; sourceTree = "<group>"; };
 		38A0AD251DC4AAF1005EA3CC /* AVLTreeIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVLTreeIndex.swift; sourceTree = "<group>"; };
 		38A0AD261DC4AAF1005EA3CC /* AVLTreeIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVLTreeIterator.swift; sourceTree = "<group>"; };
 		38A0AD271DC4AAF1005EA3CC /* AVLTreeMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVLTreeMap.swift; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 				38D2482D1E12B1FF002C7C70 /* TreeCollection.swift */,
 				38D248301E12B7E4002C7C70 /* TreeNode.swift */,
 				38D248321E12BEF8002C7C70 /* TreeIndex.swift */,
+				3824FB7C1E4F557D007AFA7F /* TreeIterator.swift */,
+				3824FB7E1E4F5660007AFA7F /* DictionaryCollection.swift */,
 			);
 			name = TreeCollection;
 			sourceTree = "<group>";
@@ -289,9 +295,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				38A0AD291DC4AAF1005EA3CC /* AVLTreeIndex.swift in Sources */,
+				3824FB7D1E4F557D007AFA7F /* TreeIterator.swift in Sources */,
 				38D248331E12BEF8002C7C70 /* TreeIndex.swift in Sources */,
 				38A0AD2B1DC4AAF1005EA3CC /* AVLTreeMap.swift in Sources */,
 				38A0AD3E1DC4AF21005EA3CC /* ListIndex.swift in Sources */,
+				3824FB7F1E4F5660007AFA7F /* DictionaryCollection.swift in Sources */,
 				38A0AD2A1DC4AAF1005EA3CC /* AVLTreeIterator.swift in Sources */,
 				38A0AD3C1DC4AF1A005EA3CC /* ListNode.swift in Sources */,
 				38A0AD3A1DC4ABD3005EA3CC /* Stack.swift in Sources */,
