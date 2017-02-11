@@ -21,7 +21,7 @@ public protocol TreeIndex: Strideable {
 	init(_ node: Node?, previous: Node?)
 }
 
-extension TreeIndex {
+extension TreeIndex where Node: BinaryTreeNode {
 	/// - complexity: Amortized O(1)
 	internal func next() -> Self {
 		precondition(node != nil)

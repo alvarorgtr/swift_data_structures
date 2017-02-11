@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3809EF5A1E4F7E8F00406001 /* BinaryTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3809EF591E4F7E8F00406001 /* BinaryTreeNode.swift */; };
 		3824FB7D1E4F557D007AFA7F /* TreeIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3824FB7C1E4F557D007AFA7F /* TreeIterator.swift */; };
 		3824FB7F1E4F5660007AFA7F /* DictionaryCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3824FB7E1E4F5660007AFA7F /* DictionaryCollection.swift */; };
 		38A0AD291DC4AAF1005EA3CC /* AVLTreeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0AD251DC4AAF1005EA3CC /* AVLTreeIndex.swift */; };
@@ -26,7 +27,7 @@
 		38B0D0B01D240121004C04BE /* DoublyLinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0AF1D240121004C04BE /* DoublyLinkedListTests.swift */; };
 		38B0D0B21D24012F004C04BE /* SinglyLinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0B11D24012F004C04BE /* SinglyLinkedListTests.swift */; };
 		38B0D0B61D24028B004C04BE /* StackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0B51D24028B004C04BE /* StackTests.swift */; };
-		38D2482E1E12B1FF002C7C70 /* TreeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D2482D1E12B1FF002C7C70 /* TreeCollection.swift */; };
+		38D2482E1E12B1FF002C7C70 /* TreeMapCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D2482D1E12B1FF002C7C70 /* TreeMapCollection.swift */; };
 		38D248311E12B7E4002C7C70 /* TreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D248301E12B7E4002C7C70 /* TreeNode.swift */; };
 		38D248331E12BEF8002C7C70 /* TreeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D248321E12BEF8002C7C70 /* TreeIndex.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3809EF591E4F7E8F00406001 /* BinaryTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTreeNode.swift; sourceTree = "<group>"; };
 		3824FB7C1E4F557D007AFA7F /* TreeIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeIterator.swift; sourceTree = "<group>"; };
 		3824FB7E1E4F5660007AFA7F /* DictionaryCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryCollection.swift; sourceTree = "<group>"; };
 		38A0AD251DC4AAF1005EA3CC /* AVLTreeIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVLTreeIndex.swift; sourceTree = "<group>"; };
@@ -64,7 +66,7 @@
 		38B0D0AF1D240121004C04BE /* DoublyLinkedListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoublyLinkedListTests.swift; sourceTree = "<group>"; };
 		38B0D0B11D24012F004C04BE /* SinglyLinkedListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglyLinkedListTests.swift; sourceTree = "<group>"; };
 		38B0D0B51D24028B004C04BE /* StackTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackTests.swift; sourceTree = "<group>"; };
-		38D2482D1E12B1FF002C7C70 /* TreeCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeCollection.swift; sourceTree = "<group>"; };
+		38D2482D1E12B1FF002C7C70 /* TreeMapCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeMapCollection.swift; sourceTree = "<group>"; };
 		38D248301E12B7E4002C7C70 /* TreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeNode.swift; sourceTree = "<group>"; };
 		38D248321E12BEF8002C7C70 /* TreeIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeIndex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,8 +176,9 @@
 		38D2482C1E12B1E3002C7C70 /* TreeCollection */ = {
 			isa = PBXGroup;
 			children = (
-				38D2482D1E12B1FF002C7C70 /* TreeCollection.swift */,
+				38D2482D1E12B1FF002C7C70 /* TreeMapCollection.swift */,
 				38D248301E12B7E4002C7C70 /* TreeNode.swift */,
+				3809EF591E4F7E8F00406001 /* BinaryTreeNode.swift */,
 				38D248321E12BEF8002C7C70 /* TreeIndex.swift */,
 				3824FB7C1E4F557D007AFA7F /* TreeIterator.swift */,
 				3824FB7E1E4F5660007AFA7F /* DictionaryCollection.swift */,
@@ -304,10 +307,11 @@
 				38A0AD3C1DC4AF1A005EA3CC /* ListNode.swift in Sources */,
 				38A0AD3A1DC4ABD3005EA3CC /* Stack.swift in Sources */,
 				38A0AD391DC4ABD3005EA3CC /* SinglyLinkedList.swift in Sources */,
+				3809EF5A1E4F7E8F00406001 /* BinaryTreeNode.swift in Sources */,
 				38A0AD401DC4AF2F005EA3CC /* ListIterator.swift in Sources */,
 				38A0AD2C1DC4AAF1005EA3CC /* AVLTreeNode.swift in Sources */,
 				38A0AD381DC4ABD3005EA3CC /* List.swift in Sources */,
-				38D2482E1E12B1FF002C7C70 /* TreeCollection.swift in Sources */,
+				38D2482E1E12B1FF002C7C70 /* TreeMapCollection.swift in Sources */,
 				38D248311E12B7E4002C7C70 /* TreeNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

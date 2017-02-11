@@ -18,6 +18,4 @@ public protocol DictionaryCollection: Collection, ExpressibleByDictionaryLiteral
 	@discardableResult mutating func updateValue(_ value: Value, forKey key: Key) -> Value?
 }
 
-extension Dictionary: DictionaryCollection {
-	
-}
+extension Dictionary: DictionaryCollection { }

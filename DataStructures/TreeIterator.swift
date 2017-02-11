@@ -10,5 +10,18 @@ import Foundation
 
 public protocol TreeIterator: IteratorProtocol {
 	associatedtype Index: TreeIndex
+	associatedtype Element = (Index.Node.Key, Index.Node.Value)
 	
+	var index: Index { get set }
+}
+
+public extension TreeIterator where Element == (Index.Node.Key, Index.Node.Value), Index.Node: BinaryTreeNode {
+	mutating func next() -> Self.Element? {
+		if let node = index.node {
+			index = index.next
+			return node.keyValue
+		}
+		
+		return nil
+	}
 }
