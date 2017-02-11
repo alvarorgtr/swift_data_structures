@@ -9,9 +9,13 @@
 import Foundation
 
 public protocol TreeCollection: BidirectionalCollection {
-	associatedtype Index: TreeIndex
+	associatedtype Index = Iterator.Index
 	associatedtype Node: Index.Node
-	associatedtype Element = (Index.Node.Key, Index.Node.Value)
+	associatedtype Element = (Iterator.Index.Node.Key, Iterator.Index.Node.Value)
+	associatedtype Iterator: TreeIterator
 	
+}
+
+public protocol TreeMapCollection: TreeCollection, DictionaryCollection {
 	
 }
