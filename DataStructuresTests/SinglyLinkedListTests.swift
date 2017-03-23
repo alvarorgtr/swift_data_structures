@@ -89,7 +89,7 @@ class SinglyLinkedListTests: XCTestCase {
 		let list = SinglyLinkedList<Int>(count: 10, repeatedValue: 2)
 		
 		XCTAssertEqual(list.count, 10, "There should be 10 values")
-		XCTAssertEqual(list.first(), 2, "The first value should be 2")
+		XCTAssertEqual(list.first, 2, "The first value should be 2")
 	}
 	
 	func testOtherSequenceInit() {
