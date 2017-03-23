@@ -13,6 +13,7 @@
 		384F32C11E84391D00F2ED36 /* GraphCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C01E84391D00F2ED36 /* GraphCollection.swift */; };
 		384F32C31E843C7200F2ED36 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C21E843C7200F2ED36 /* Graph.swift */; };
 		384F32C61E847E2100F2ED36 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C51E847E2100F2ED36 /* Queue.swift */; };
+		384F32C81E8481FA00F2ED36 /* GraphEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C71E8481FA00F2ED36 /* GraphEdge.swift */; };
 		38A0AD291DC4AAF1005EA3CC /* AVLTreeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0AD251DC4AAF1005EA3CC /* AVLTreeIndex.swift */; };
 		38A0AD2A1DC4AAF1005EA3CC /* AVLTreeIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0AD261DC4AAF1005EA3CC /* AVLTreeIterator.swift */; };
 		38A0AD2B1DC4AAF1005EA3CC /* AVLTreeMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0AD271DC4AAF1005EA3CC /* AVLTreeMap.swift */; };
@@ -52,6 +53,7 @@
 		384F32C01E84391D00F2ED36 /* GraphCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCollection.swift; sourceTree = "<group>"; };
 		384F32C21E843C7200F2ED36 /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		384F32C51E847E2100F2ED36 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		384F32C71E8481FA00F2ED36 /* GraphEdge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphEdge.swift; sourceTree = "<group>"; };
 		38A0AD251DC4AAF1005EA3CC /* AVLTreeIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVLTreeIndex.swift; sourceTree = "<group>"; };
 		38A0AD261DC4AAF1005EA3CC /* AVLTreeIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVLTreeIterator.swift; sourceTree = "<group>"; };
 		38A0AD271DC4AAF1005EA3CC /* AVLTreeMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVLTreeMap.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				384F32C01E84391D00F2ED36 /* GraphCollection.swift */,
 				384F32C21E843C7200F2ED36 /* Graph.swift */,
+				384F32C71E8481FA00F2ED36 /* GraphEdge.swift */,
 			);
 			name = Graphs;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38A0AD291DC4AAF1005EA3CC /* AVLTreeIndex.swift in Sources */,
+				384F32C81E8481FA00F2ED36 /* GraphEdge.swift in Sources */,
 				3824FB7D1E4F557D007AFA7F /* TreeIterator.swift in Sources */,
 				38D248331E12BEF8002C7C70 /* TreeIndex.swift in Sources */,
 				384F32C61E847E2100F2ED36 /* Queue.swift in Sources */,
