@@ -8,9 +8,7 @@
 
 import Foundation
 
-public struct Stack<Element>: Sequence, ExpressibleByArrayLiteral {
-	public typealias Iterator = AnyIterator<Element>
-	
+public struct Stack<Element>: ExpressibleByArrayLiteral {	
 	private var storage: SinglyLinkedList<Element>
 	
 	public var count: Int {
@@ -39,11 +37,22 @@ public struct Stack<Element>: Sequence, ExpressibleByArrayLiteral {
 		storage = SinglyLinkedList<Element>(count: count, repeatedValue: repeatedValue)
 	}
 	
-	// MARK: Accessors and mutators
+	// MARK: Accessors
 	
-	// MARK: Iteration
+	public mutating func push(_ element: Element) {
+		storage.prepend(element)
+	}
 	
-	public func makeIterator() -> Stack.Iterator {
-		return storage.makeIterator()
+	@discardableResult
+	public mutating func pop() -> Element? {
+		if !storage.isEmpty {
+			return storage.deleteFirst()
+		}
+		
+		return nil
+	}
+	
+	public var top: Element? {
+		return storage.first
 	}
 }

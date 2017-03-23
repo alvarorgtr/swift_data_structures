@@ -115,7 +115,7 @@ public struct SinglyLinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
 	
 	- complexity: O(1)
 	*/
-	public func first() -> Element? {
+	public var first: Element? {
 		return head?.value
 	}
 	
