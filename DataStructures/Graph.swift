@@ -31,32 +31,8 @@ extension Graph: GraphCollection {
 	public typealias Index = Int
 	public typealias Iterator = AnyIterator<Vertex>
 	
-	public var startIndex: Int {
-		return 0
-	}
-	
-	public var endIndex: Int {
-		return count
-	}
-	
-	public func index(after i: Index) -> Index {
-		return i + 1
-	}
-	
-	public func makeIterator() -> AnyIterator<Vertex> {
-		var index = 0
-		return AnyIterator<Vertex> {
-			if index < self.endIndex {
-				index += 1
-				return self[index]
-			}
-			
-			return nil
-		}
-	}
-	
-	public subscript(i: Index) -> Vertex {
-		return vertices[i]
+	public func vertex(for label: Int) -> Element {
+		return vertices[label]
 	}
 }
 
