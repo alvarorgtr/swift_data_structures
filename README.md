@@ -4,13 +4,19 @@ The purpose of this project is to implement a series of well-known data structur
 
 Basic list of structures to be implemented:
 - Linear data structures:
-  - Singly linked list
+  - Singly linked list 
   - Doubly linked list
   - Queue
   - Stack
   - Deque (double ended queue)
 - Trees:
-  - Binary search tree
-  - Tree map
+  - Tree maps:
     - AVL tree map
-    - Left-leaning red-black tree map 
+    - Left-leaning red-black tree map
+- Graphs:
+  - Graph
+  - Directed graph
+  - Weighted graph
+  -[Implementation of several graph algorithms]
+
+When possible, each data structure will conform to the Sequence protocol, the Collection protocol or any of their children protocols. Moreover, new protocols for handling, for example, TreeMapCollections will be developed, to ease the creation of new TreeMap types.
