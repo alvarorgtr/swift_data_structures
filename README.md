@@ -17,6 +17,6 @@ Basic list of structures to be implemented:
   - Graph
   - Directed graph
   - Weighted graph
-  -[Implementation of several graph algorithms]
+  - [Implementation of several graph algorithms]
 
 When possible, each data structure will conform to the Sequence protocol, the Collection protocol or any of their children protocols. Moreover, new protocols for handling, for example, TreeMapCollections will be developed, to ease the creation of new TreeMap types.

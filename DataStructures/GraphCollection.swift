@@ -16,6 +16,8 @@ public protocol GraphCollection: Collection {
 	var edgeCount: Int { get }
 	
 	func vertex(for label: Int) -> Vertex
+	
+	// func add(vertex: Vertex)
 }
 
 public extension GraphCollection where IndexDistance == Int {

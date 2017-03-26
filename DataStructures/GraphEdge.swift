@@ -9,21 +9,23 @@
 import Foundation
 
 public protocol GraphEdgeProtocol: Equatable {
-	var from: Int { get set }
-	var to: Int { get set }
+	associatedtype Label: Equatable
 	
-	var either: Int { get }
-	func other(endpoint: Int) -> Int
+	var from: Label { get }
+	var to: Label { get }
 	
-	init(from: Int, to: Int)
+	var either: Label { get }
+	func other(endpoint: Label) -> Label
+	
+	init(from: Label, to: Label)
 }
 
 extension GraphEdgeProtocol {
-	public var either: Int {
+	public var either: Label {
 		return from
 	}
 	
-	public func other(endpoint: Int) -> Int {
+	public func other(endpoint: Label) -> Label {
 		return (from == endpoint) ? to : from
 	}
 }
