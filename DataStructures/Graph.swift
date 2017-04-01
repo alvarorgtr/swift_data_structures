@@ -44,14 +44,8 @@ public struct Graph<Label: Hashable> {
 		keys = [:]
 	}
 	
-	init<V: Sequence, E: Sequence>(vertices: V, edges: E) where V.Iterator.Element == Vertex, E.Iterator.Element == (from: Vertex, to: Vertex) {
-		self.vertices = [Vertex](vertices)
-		self.edges = Array(repeating: List<Edge>(), count: self.vertices.count)
-		keys = [:]
-		
-		for (index, vertex) in self.vertices.enumerated() {
-			keys[vertex] = index
-		}
+	init <E: Sequence>(edges: E) where E.Iterator.Element == (from: Vertex, to: Vertex) {
+		self.init()
 		
 		for edgeTuple in edges {
 			if let from = keys[edgeTuple.from], let to = keys[edgeTuple.to] {
@@ -63,6 +57,20 @@ public struct Graph<Label: Hashable> {
 			} else {
 				fatalError("Unknown vertex in edge")
 			}
+		}
+	}
+	
+	init<V: Sequence, E: Sequence>(vertices: V, edges: E) where V.Iterator.Element == Vertex, E.Iterator.Element == (from: Vertex, to: Vertex) {
+		self.vertices = [Vertex](vertices)
+		self.edges = Array(repeating: List<Edge>(), count: self.vertices.count)
+		keys = [:]
+		
+		for (index, vertex) in self.vertices.enumerated() {
+			keys[vertex] = index
+		}
+		
+		for edge in edges {
+			addEdge(from: edge.from, to: edge.to)
 		}
 	}
 	
@@ -79,6 +87,20 @@ public struct Graph<Label: Hashable> {
 		return AnySequence<GraphEdge<Vertex>>(self.edges[keys[vertex]!].map({ (edge) -> GraphEdge<Vertex> in
 			return GraphEdge<Vertex>(from: self.vertices[edge.from], to: self.vertices[edge.to])
 		}))
+	}
+	
+	public func areAdjacent(_ v: Vertex, _ w: Vertex) -> Bool {
+		guard let vIndex = keys[v], let wIndex = keys[w] else {
+			return false
+		}
+		
+		let adjacency = edges[vIndex]
+		for edge in adjacency {
+			if edge.to == wIndex {
+				return true
+			}
+		}
+		return false
 	}
 	
 	// MARK: Mutators
