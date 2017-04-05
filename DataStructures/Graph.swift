@@ -21,9 +21,9 @@ public struct Graph<Label: Hashable> {
 	public typealias Vertex = Label
 	public typealias Edge = GraphEdge<Int>
 	
-	private var edges: [List<Edge>]
-	fileprivate var vertices: [Vertex]
-	private var keys: [Vertex: Int]
+	internal var edges: [List<Edge>]
+	internal var vertices: [Vertex]
+	internal var keys: [Vertex: Int]
 	
 	public var edgeCount: Int = 0
 	
@@ -59,8 +59,8 @@ public struct Graph<Label: Hashable> {
 			if let from = keys[edgeTuple.0], let to = keys[edgeTuple.1] {
 				let edge1 = Edge(from: from, to: to)
 				let edge2 = Edge(from: to, to: from)
-				self.edges[edge1.from].appendFirst(edge1)
-				self.edges[edge2.from].appendFirst(edge2)
+				self.edges[edge1.from].appendLast(edge1)
+				self.edges[edge2.from].appendLast(edge2)
 				edgeCount += 1
 			} else {
 				fatalError("Unknown vertex in edge")
@@ -75,11 +75,11 @@ public struct Graph<Label: Hashable> {
 		return edges[keys[vertex]!].count
 	}
 	
-	public func adjacentVertices(to vertex: Vertex) -> AnySequence<GraphEdge<Vertex>> {
+	public func adjacentVertices(to vertex: Vertex) -> AnySequence<Vertex> {
 		precondition(keys[vertex] != nil, "The vertex must be in the graph")
 
-		return AnySequence<GraphEdge<Vertex>>(self.edges[keys[vertex]!].map({ (edge) -> GraphEdge<Vertex> in
-			return GraphEdge<Vertex>(from: self.vertices[edge.from], to: self.vertices[edge.to])
+		return AnySequence<Vertex>(self.edges[keys[vertex]!].map({ (edge) -> Vertex in
+			return self.vertices[edge.to]
 		}))
 	}
 	
@@ -129,8 +129,8 @@ public struct Graph<Label: Hashable> {
 		let edge1 = Edge(from: fromInt, to: toInt)
 		let edge2 = Edge(from: toInt, to: fromInt)
 
-		edges[fromInt].appendFirst(edge1)
-		edges[toInt].appendFirst(edge2)
+		edges[fromInt].appendLast(edge1)
+		edges[toInt].appendLast(edge2)
 		
 		edgeCount += 1
 	}
@@ -150,8 +150,13 @@ extension Graph: GraphCollection {
 	public typealias Index = Int
 	public typealias Iterator = AnyIterator<Vertex>
 	
-	public func vertex(for label: Int) -> Element {
-		return vertices[label]
+	public func vertex(for index: Int) -> Element {
+		return vertices[index]
+	}
+	
+	public func index(for vertex: Vertex) -> Int {
+		precondition(keys[vertex] != nil, "The vertex doesn't exist")
+		return keys[vertex]!
 	}
 }
 

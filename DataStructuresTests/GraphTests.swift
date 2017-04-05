@@ -66,7 +66,7 @@ class GraphTests: XCTestCase {
 		XCTAssertTrue(smallGraph.areAdjacent(4, 2), "4 and 2 are adjacent")
 		XCTAssertFalse(smallGraph.areAdjacent(5, 6), "5 and 6 are not adjacent")
 		
-		for pair in zip(smallGraph.adjacentVertices(to: 4).map { $0.to }, [1, 2]) {
+		for pair in zip(smallGraph.adjacentVertices(to: 4), [2, 1]) {
 			XCTAssertEqual(pair.0, pair.1, "Wrong adjacency list for vertex 4: \(pair.0) != \(pair.1)")
 		}
 	}
@@ -81,7 +81,7 @@ class GraphTests: XCTestCase {
 		XCTAssertTrue(graph.areAdjacent("4", "2"), "4 and 2 are adjacent")
 		XCTAssertFalse(graph.areAdjacent("5", "6"), "5 and 6 are not adjacent")
 		
-		for pair in zip(graph.adjacentVertices(to: "4").map { $0.to }, ["2", "1"]) {
+		for pair in zip(graph.adjacentVertices(to: "4"), ["1", "2"]) {
 			XCTAssertEqual(pair.0, pair.1, "Wrong adjacency list for vertex 4: \(pair.0) != \(pair.1)")
 		}
 	}
@@ -105,6 +105,20 @@ class GraphTests: XCTestCase {
 		graph.add(edge: GraphEdge<String>(from: "B", to: "A"))
 		XCTAssertTrue(graph.areAdjacent("A", "B"), "A and B are adjacent")
 		XCTAssertFalse(graph.areAdjacent("B", "B"), "B is not adjacent to itself")
+	}
+	
+	func testDFS() {
+		XCTAssertTrue(smallGraph.depthFirstSearched().elementsEqual([1,2,3,4,5,7,6]), "The DFS is not that")
+		
+		let graph2 = Graph<Int>(edges: [(1,2),(2,3),(3,4),(1,5),(5,6),(6,7),(5,8),(1,9),(9,10)])
+		XCTAssertTrue(graph2.depthFirstSearched().elementsEqual(1...10), "The DFS is not that")
+	}
+	
+	func testBFS() {
+		XCTAssertTrue(smallGraph.breadthFirstSearched().elementsEqual([1,2,4,3,5,7,6]), "The BFS is not that")
+		
+		let stringGraph = Graph<String>(edges: [("A","E"), ("A","B"), ("A", "C"), ("A","G"), ("E","D"), ("E","F"), ("D", "F"), ("F", "G")])
+		XCTAssertTrue(stringGraph.breadthFirstSearched().elementsEqual(["A", "E", "B", "C", "G", "D", "F"]), "The BFS is not that")
 	}
 }
 

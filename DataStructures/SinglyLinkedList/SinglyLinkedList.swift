@@ -26,7 +26,6 @@ public struct SinglyLinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
 		return head == nil
 	}
 	
-	
 	// MARK: Initializers
 	/**
 	Creates an empty singly linked list.
