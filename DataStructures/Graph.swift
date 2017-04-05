@@ -21,11 +21,6 @@ public struct Graph<Label: Hashable> {
 	public typealias Vertex = Label
 	public typealias Edge = GraphEdge<Int>
 	
-	/*
-	private ST<String, Integer> st;
-	private String[] keys;
-	private Graph G;
-	*/
 	private var edges: [List<Edge>]
 	fileprivate var vertices: [Vertex]
 	private var keys: [Vertex: Int]
@@ -44,23 +39,14 @@ public struct Graph<Label: Hashable> {
 		keys = [:]
 	}
 	
-	init <E: Sequence>(edges: E) where E.Iterator.Element == (from: Vertex, to: Vertex) {
+	init <E: Sequence>(edges: E) where E.Iterator.Element == (Vertex, Vertex) {
 		self.init()
-		
-		for edgeTuple in edges {
-			if let from = keys[edgeTuple.from], let to = keys[edgeTuple.to] {
-				let edge1 = Edge(from: from, to: to)
-				let edge2 = Edge(from: to, to: from)
-				self.edges[edge1.from].appendFirst(edge1)
-				self.edges[edge2.from].appendFirst(edge2)
-				edgeCount += 1
-			} else {
-				fatalError("Unknown vertex in edge")
-			}
+		for edge in edges {
+			addEdge(from: edge.0, to: edge.1)
 		}
 	}
 	
-	init<V: Sequence, E: Sequence>(vertices: V, edges: E) where V.Iterator.Element == Vertex, E.Iterator.Element == (from: Vertex, to: Vertex) {
+	init<V: Sequence, E: Sequence>(vertices: V, edges: E) where V.Iterator.Element == Vertex, E.Iterator.Element == (Vertex, Vertex) {
 		self.vertices = [Vertex](vertices)
 		self.edges = Array(repeating: List<Edge>(), count: self.vertices.count)
 		keys = [:]
@@ -69,8 +55,16 @@ public struct Graph<Label: Hashable> {
 			keys[vertex] = index
 		}
 		
-		for edge in edges {
-			addEdge(from: edge.from, to: edge.to)
+		for edgeTuple in edges {
+			if let from = keys[edgeTuple.0], let to = keys[edgeTuple.1] {
+				let edge1 = Edge(from: from, to: to)
+				let edge2 = Edge(from: to, to: from)
+				self.edges[edge1.from].appendFirst(edge1)
+				self.edges[edge2.from].appendFirst(edge2)
+				edgeCount += 1
+			} else {
+				fatalError("Unknown vertex in edge")
+			}
 		}
 	}
 	
@@ -116,6 +110,7 @@ public struct Graph<Label: Hashable> {
 			return index
 		} else {
 			vertices.append(vertex)
+			edges.append(List<Edge>())
 			keys[vertex] = vertexCount - 1
 			return vertexCount - 1
 		}
@@ -147,8 +142,6 @@ public struct Graph<Label: Hashable> {
 	public mutating func add(edge: GraphEdge<Vertex>) {
 		addEdge(from: edge.from, to: edge.to)
 	}
-	
-	
 }
 
 extension Graph: GraphCollection {
