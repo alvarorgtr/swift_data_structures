@@ -115,7 +115,7 @@ public class FibonacciHeap<Element: Hashable> {
 	@discardableResult
 	public func extractMinimum() -> Element? {
 		if let min = min {
-			if let child = min.child {
+			/* if let child = min.child {
 				child.left.right = min.right
 				min.right.left = child.left
 				child.left = min.left
@@ -129,7 +129,26 @@ public class FibonacciHeap<Element: Hashable> {
 			while child !== min.right {
 				child.parent = nil
 				child = child.right
+			} */
+			
+			// Add every child to root list
+			if let child = min.child {
+				var node = child.right!
+				var next: Node?
+				addToRootList(child)
+				child.parent = nil
+			
+				while node !== child {
+					next = node.right
+					addToRootList(node)
+					node.parent = nil
+					node = next!
+				}
 			}
+			
+			// Remove min
+			min.left.right = min.right
+			min.right.left = min.left
 			
 			if min === min.right {
 				self.min = nil
@@ -146,19 +165,33 @@ public class FibonacciHeap<Element: Hashable> {
 		return nil
 	}
 	
+	private func addToRootList(_ node: Node) {
+		precondition(min != nil)
+		node.right = min!.right
+		min!.right.left = node
+		min!.right = node
+		node.left = min!
+	}
+	
 	private func consolidate() {
 		var a = Array<Node?>(repeating: nil, count: count)
-		var root: Node = min!.right
-		var node = root
-		var first = true
+		let root: Node = min!.right
+		
+		var queue: Queue<Node> = [root]
+		var node = root.right!
+		while node !== root {
+			queue.push(node)
+			node = node.right
+		}
 		
 		// TODO: como haya que consolidar root el bucle se pasa de frenada
-		while node !== root || first {
-			first = false
+		while let node = queue.pop() {
+			if node.parent != nil {		// We don't consider the nodes which have already been consolidated
+				continue
+			}
 			
 			var x = node
 			var d = node.degree
-			node = node.right
 			
 			while a[d] != nil {
 				var y = a[d]!
@@ -166,13 +199,6 @@ public class FibonacciHeap<Element: Hashable> {
 					let aux = x
 					x = y
 					y = aux
-				}
-				
-				// Make sure that root is still pointing to the first element we don't want to consider.
-				if root === y {
-					first = node !== root	// If this happens on the first iteration, we may mark as root the new one
-											// but we haven't visited it yet.
-					root = root.right
 				}
 				
 				link(node: y, to: x)

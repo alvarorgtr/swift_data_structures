@@ -51,5 +51,15 @@ class FibonacciHeapTests: XCTestCase {
 		
 		var heap3 = heap.union(heap2)
 		heap3.extractMinimum()
+		heap3.extractMinimum()
+		heap3.extractMinimum()
+		heap3.insert(42)
+		heap3.insert(1)
+		heap3.insert(10)
+		heap3.insert(31)
+		heap3.extractMinimum()
+		heap3.insert(11)
+		heap3.extractMinimum()
+		heap3.extractMinimum()
 	}
 }
