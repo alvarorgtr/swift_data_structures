@@ -33,6 +33,15 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 	}
 	
 	
+	public func contains(_ element: Element) -> Bool {
+		return handler[element] != nil
+	}
+	
+	public func priority(of element: Element) -> Priority? {
+		return handler[element]?.priority
+	}
+	
+	
 	/// Inserts an element into the heap.
 	///
 	/// - Parameter element: the element to be inserted.
@@ -61,11 +70,12 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 	}
 	
 	
-	/// Returns the smallest element in the queue (with the given order)
+	/// Returns the smallest element in the heap (with the given order).
 	public var minimum: Element? {
 		return min?.key
 	}
 	
+	/// Returns the priority of the smallest element in the heap.
 	public var minimumPriority: Priority? {
 		return min?.priority
 	}
@@ -112,6 +122,13 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 		if less(min2.priority, min1.priority) {
 			heap.min = min2
 		}
+		
+		heap.handler = self.handler
+		for (key, value) in heap2.handler {
+			heap.handler[key] = value
+		}
+		self.handler = [:]
+		heap2.handler = [:]
 		
 		return heap
 	}
@@ -183,7 +200,6 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 			node = node.right
 		}
 		
-		// TODO: como haya que consolidar root el bucle se pasa de frenada
 		while let node = queue.pop() {
 			if node.parent != nil {		// We don't consider the nodes which have already been consolidated
 				continue
@@ -250,6 +266,85 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 		}
 		
 		x.degree += 1
+		
+		y.marked = false
+	}
+	
+	
+	public func decreasePriority(of element: Element, to priority: Priority) {
+		if let node = handler[element] {
+			decreasePriority(of: node, to: priority)
+		} else {
+			fatalError("No such node")
+		}
+	}
+	
+	private func decreasePriority(of x: Node, to priority: Priority) {
+		precondition(less(priority, x.priority), "The new priority must be smaller than the previous one")
+		
+		x.priority = priority
+		
+		if let y = x.parent, less(x.priority, y.priority) {
+			cut(x, y)
+			cascadingCut(y)
+		}
+		
+		if less(x.priority, min!.priority) {
+			min = x
+		}
+	}
+	
+	private func cut(_ x: Node, _ y: Node) {
+		if x.left !== x {
+			x.left.right = x.right
+			x.right.left = x.left
+			y.child = x.left
+		} else {
+			y.child = nil
+		}
+		
+		y.degree -= 1
+		
+		x.left = min!
+		x.right = min!.right
+		min!.right.left = x
+		min!.right = x
+		
+		x.parent = nil
+		
+		x.marked = false
+	}
+	
+	private func cascadingCut(_ y: Node) {
+		if let z = y.parent {
+			if !y.marked {
+				y.marked = true
+			} else {
+				cut(y, z)
+				cascadingCut(z)
+			}
+		}
+	}
+	
+	
+	public func delete(_ element: Element) {
+		if let node = handler[element] {
+			delete(node: node)
+		}
+	}
+	
+	private func delete(node x: Node) {
+		// Make the node the smallest
+		// This code mimics the behaviour of decreasePriority but assumes x < y is true for any y
+		if let y = x.parent {
+			cut(x, y)
+			cascadingCut(y)
+		}
+		
+		min = x
+		
+		// Now that it's the smallest we can safely delete it.
+		extractMinimum()
 	}
 }
 

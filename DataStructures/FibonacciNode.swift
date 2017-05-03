@@ -34,7 +34,7 @@ internal class FibonacciNode<Element: Equatable, Priority> {
 
 extension FibonacciNode: CustomDebugStringConvertible {
 	var debugDescription: String {
-		var string = "(\(key)"
+		var string = "([\(key), \(priority)]"
 		
 		if let child = child {
 			string += ":"
