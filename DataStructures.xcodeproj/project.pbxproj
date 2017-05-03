@@ -13,6 +13,7 @@
 		384251851EB398E200EDE828 /* FibonacciHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384251841EB398E200EDE828 /* FibonacciHeap.swift */; };
 		384251871EB39B4600EDE828 /* FibonacciNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384251861EB39B4600EDE828 /* FibonacciNode.swift */; };
 		3842518A1EB3D10600EDE828 /* FibonacciHeapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384251891EB3D10600EDE828 /* FibonacciHeapTests.swift */; };
+		384BA6751EB4B8DD00385A3B /* random3000.txt in Resources */ = {isa = PBXBuildFile; fileRef = 384BA6741EB4B8DD00385A3B /* random3000.txt */; };
 		384F32C11E84391D00F2ED36 /* GraphCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C01E84391D00F2ED36 /* GraphCollection.swift */; };
 		384F32C31E843C7200F2ED36 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C21E843C7200F2ED36 /* Graph.swift */; };
 		384F32C61E847E2100F2ED36 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C51E847E2100F2ED36 /* Queue.swift */; };
@@ -61,6 +62,7 @@
 		384251861EB39B4600EDE828 /* FibonacciNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FibonacciNode.swift; sourceTree = "<group>"; };
 		384251881EB3BD4800EDE828 /* TestPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestPlayground.playground; sourceTree = "<group>"; };
 		384251891EB3D10600EDE828 /* FibonacciHeapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FibonacciHeapTests.swift; sourceTree = "<group>"; };
+		384BA6741EB4B8DD00385A3B /* random3000.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = random3000.txt; sourceTree = "<group>"; };
 		384F32C01E84391D00F2ED36 /* GraphCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCollection.swift; sourceTree = "<group>"; };
 		384F32C21E843C7200F2ED36 /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		384F32C51E847E2100F2ED36 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				38A078071E954FC400329E96 /* BigGraph.txt */,
+				384BA6741EB4B8DD00385A3B /* random3000.txt */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				384BA6751EB4B8DD00385A3B /* random3000.txt in Resources */,
 				38A078081E954FC400329E96 /* BigGraph.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

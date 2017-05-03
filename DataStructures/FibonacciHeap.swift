@@ -16,6 +16,10 @@ public class FibonacciHeap<Element: Hashable> {
 	let less: (Element, Element) -> Bool
 	public fileprivate(set) var count: Int = 0
 	
+	public var isEmpty: Bool {
+		return count == 0
+	}
+	
 	fileprivate var min: Node?
 	fileprivate var handler: [Element: Node] = [:]
 	

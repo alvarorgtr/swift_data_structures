@@ -50,3 +50,7 @@ heap3.extractMinimum()
 heap3
 heap3.extractMinimum()
 heap3
+heap3.extractMinimum()
+heap3
+heap3.extractMinimum()
+heap3
