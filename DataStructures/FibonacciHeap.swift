@@ -10,10 +10,10 @@
 
 import Foundation
 
-public class FibonacciHeap<Element: Hashable> {
-	fileprivate typealias Node = FibonacciNode<Element>
+public class FibonacciHeap<Element: Hashable, Priority> {
+	fileprivate typealias Node = FibonacciNode<Element, Priority>
 	
-	let less: (Element, Element) -> Bool
+	let less: (Priority, Priority) -> Bool
 	public fileprivate(set) var count: Int = 0
 	
 	public var isEmpty: Bool {
@@ -28,7 +28,7 @@ public class FibonacciHeap<Element: Hashable> {
 	///
 	/// - Parameter comparator: a closure which returns true if the first element is smaller than the second element (for a minimum heap), and false otherwise.
 	/// - Complexity: O(1)
-	public required init(comparator: @escaping (Element, Element) -> Bool) {
+	public required init(comparator: @escaping (Priority, Priority) -> Bool) {
 		self.less = comparator
 	}
 	
@@ -37,8 +37,8 @@ public class FibonacciHeap<Element: Hashable> {
 	///
 	/// - Parameter element: the element to be inserted.
 	/// - Complexity: O(1)
-	public func insert(_ element: Element) {
-		let node = Node(key: element)
+	public func insert(_ element: Element, with priority: Priority) {
+		let node = Node(key: element, priority: priority)
 		handler[element] = node
 		self.insert(node: node)
 	}
@@ -50,7 +50,7 @@ public class FibonacciHeap<Element: Hashable> {
 			node.left.right = node
 			min.left = node
 			
-			if less(node.key, min.key) {
+			if less(node.priority, min.priority) {
 				self.min = node
 			}
 		} else {
@@ -66,6 +66,10 @@ public class FibonacciHeap<Element: Hashable> {
 		return min?.key
 	}
 	
+	public var minimumPriority: Priority? {
+		return min?.priority
+	}
+	
 	
 	/// Performs the union of self with another heap.
 	///
@@ -74,8 +78,8 @@ public class FibonacciHeap<Element: Hashable> {
 	///
 	/// - Parameter heap2: the second heap.
 	/// - Returns: the result of the union.
-	public func union(_ heap2: FibonacciHeap<Element>) -> FibonacciHeap<Element> {
-		let heap = FibonacciHeap<Element>(comparator: less)
+	public func union(_ heap2: FibonacciHeap<Element, Priority>) -> FibonacciHeap<Element, Priority> {
+		let heap = FibonacciHeap<Element, Priority>(comparator: less)
 
 		guard let min1 = self.min else {
 			heap.min = heap2.min
@@ -105,36 +109,27 @@ public class FibonacciHeap<Element: Hashable> {
 		min1.right = min2
 		min2.left = min1
 		
-		if less(min2.key, min1.key) {
+		if less(min2.priority, min1.priority) {
 			heap.min = min2
 		}
 		
 		return heap
 	}
 	
-	
 	/// Extracts and returns the minimum of the heap.
 	///
 	/// - Returns: The minimum
 	@discardableResult
 	public func extractMinimum() -> Element? {
+		return extractMinimumAndPriority()?.0
+	}
+	
+	/// Extracts and returns the minimum of the heap.
+	///
+	/// - Returns: A tuple formed by the minimum and the priority.
+	@discardableResult
+	public func extractMinimumAndPriority() -> (Element, Priority)? {
 		if let min = min {
-			/* if let child = min.child {
-				child.left.right = min.right
-				min.right.left = child.left
-				child.left = min.left
-				min.left.right = child
-			} else {
-				min.left.right = min.right
-				min.right.left = min.left
-			}
-			
-			var child: Node = min.left.right
-			while child !== min.right {
-				child.parent = nil
-				child = child.right
-			} */
-			
 			// Add every child to root list
 			if let child = min.child {
 				var node = child.right!
@@ -163,7 +158,7 @@ public class FibonacciHeap<Element: Hashable> {
 			
 			handler[min.key] = nil
 			count -= 1
-			return min.key
+			return (min.key, min.priority)
 		}
 		
 		return nil
@@ -199,7 +194,7 @@ public class FibonacciHeap<Element: Hashable> {
 			
 			while a[d] != nil {
 				var y = a[d]!
-				if less(y.key, x.key) {
+				if less(y.priority, x.priority) {
 					let aux = x
 					x = y
 					y = aux
@@ -229,7 +224,7 @@ public class FibonacciHeap<Element: Hashable> {
 					head!.left = elem
 				}
 				
-				if min == nil || less(elem.key, min!.key) {
+				if min == nil || less(elem.priority, min!.priority) {
 					min = elem
 				}
 			}
@@ -278,8 +273,9 @@ extension FibonacciHeap: CustomDebugStringConvertible {
 	}
 }
 
-public extension FibonacciHeap where Element: Comparable {
-	public convenience init() {
-		self.init(comparator: { return $0 < $1 })
+public extension FibonacciHeap where Priority: Comparable {
+	public convenience init(minimum: Bool = true) {
+		let comparator: (Priority, Priority) -> Bool = minimum ? { return $0 < $1 } : { return $0 > $1 }
+		self.init(comparator: comparator)
 	}
 }

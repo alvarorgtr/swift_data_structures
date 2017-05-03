@@ -35,40 +35,42 @@ class FibonacciHeapTests: XCTestCase {
     */
 	
 	func testCreation() {
-		let heap = FibonacciHeap<Int>()
+		let heap = FibonacciHeap<Int, Int>()
 		XCTAssertEqual(heap.count, 0, "The count should be 0")
 		
-		let heap2 = FibonacciHeap<Int>(comparator: { $0 > $1 })
+		let heap2 = FibonacciHeap<Int, Int>(comparator: { $0 > $1 })
 		XCTAssertEqual(heap2.count, 0, "The count should be 0")
 		
-		let heap3 = FibonacciHeap<String>(comparator: { $0.characters.count < $1.characters.count })
+		let heap3 = FibonacciHeap<Float, String>(comparator: { $0.characters.count < $1.characters.count })
 		XCTAssertEqual(heap3.count, 0, "The count should be 0")
 	}
 	
 	func testBasicInsertion() {
-		let heap = FibonacciHeap<Int>()
+		let heap = FibonacciHeap<String, Int>()
 		insertAndAssert((0...200).reversed(), on: heap)
 		
-		let heap2 = FibonacciHeap<Int>(comparator: { $0 > $1 })
+		let heap2 = FibonacciHeap<String, Int>(comparator: { $0 > $1 })
 		insertAndAssert(stride(from: -500, to: 500, by: 5), on: heap2)
 		
-		let heap3 = FibonacciHeap<Double>()
+		let heap3 = FibonacciHeap<String, Double>()
 		insertAndAssert((0...100).map({ pow(2, -0.2 * Double($0)) }), on: heap3)
 	}
 	
-	private func insertAndAssert<T: Hashable, S: Sequence>(_ values: S, on heap: FibonacciHeap<T>) where S.Iterator.Element == T {
-		var min: T?
+	private func insertAndAssert<P: Comparable, S: Sequence>(_ values: S, on heap: FibonacciHeap<String, P>) where S.Iterator.Element == P {
+		var min: P?
+		var minLabel: String?
 		
-		for (index, elem) in values.enumerated() {
-			heap.insert(elem)
+		for (index, priority) in values.enumerated() {
+			heap.insert("\(priority)", with: priority)
 			XCTAssertEqual(heap.count, index + 1, "The count is not correct")
 			
-			if min == nil || heap.less(elem, min!) {
-				min = elem
+			if min == nil || heap.less(priority, min!) {
+				min = priority
+				minLabel = "\(priority)"
 			}
 			
 			if let minimum = heap.minimum {
-				XCTAssertEqual(minimum, min, "The minimum is not correct")
+				XCTAssertEqual(minimum, minLabel, "The minimum is not correct")
 			} else {
 				XCTFail("There should be a minimum")
 			}
@@ -76,19 +78,19 @@ class FibonacciHeapTests: XCTestCase {
 	}
 	
 	func testInsertAndRemove() {
-		let heap = FibonacciHeap<Int>()
+		let heap = FibonacciHeap<Int, Int>()
 		insertAndRemoveAsserting((0...200).reversed(), on: heap)
 		
-		let heap2 = FibonacciHeap<Int>(comparator: { $0 > $1 })
+		let heap2 = FibonacciHeap<Int, Int>(comparator: { $0 > $1 })
 		insertAndRemoveAsserting(stride(from: -500, to: 500, by: 5), on: heap2)
 		
-		let heap3 = FibonacciHeap<Double>()
+		let heap3 = FibonacciHeap<Double, Double>()
 		insertAndRemoveAsserting((0...100).map({ pow(2, -0.2 * Double($0)) }), on: heap3)
 	}
 	
-	private func insertAndRemoveAsserting<T: Hashable, S: Sequence>(_ values: S, on heap: FibonacciHeap<T>) where S.Iterator.Element == T {
+	private func insertAndRemoveAsserting<T: Hashable, S: Sequence>(_ values: S, on heap: FibonacciHeap<T, T>) where S.Iterator.Element == T {
 		for elem in values {
-			heap.insert(elem)
+			heap.insert(elem, with: elem)
 		}
 		
 		var lastExtracted: T?
@@ -111,11 +113,11 @@ class FibonacciHeapTests: XCTestCase {
 				
 				// 6.080 sec (4% Std) for 6001 numbers
 				// sum_i=1^6001 log(i) = 9426
-				let heap = FibonacciHeap<Int>()
+				let heap = FibonacciHeap<Int, Int>()
 				self.insertAndRemoveAsserting(numbers, on: heap)
 				// ---
 				
-				let heap2 = FibonacciHeap<Int>(comparator: { $0 > $1 })
+				let heap2 = FibonacciHeap<Int, Int>(comparator: { $0 > $1 })
 				self.insertAndRemoveAsserting(numbers, on: heap2)
 			} catch {
 				XCTFail("File parsing failed")
@@ -131,14 +133,14 @@ class FibonacciHeapTests: XCTestCase {
 				
 				// 6.080 sec (4% Std) for 6001 numbers
 				// sum_i=1^6001 log(i) = 9426
-				let heap1 = FibonacciHeap<Int>()
-				let heap2 = FibonacciHeap<Int>()
+				let heap1 = FibonacciHeap<Int, Int>()
+				let heap2 = FibonacciHeap<Int, Int>()
 				
 				for i in 0..<numbers.count {
 					if i % 2 == 0 {
-						heap1.insert(i)
+						heap1.insert(i, with: i)
 					} else {
-						heap2.insert(i)
+						heap2.insert(i, with: i)
 					}
 				}
 				

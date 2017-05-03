@@ -8,10 +8,11 @@
 
 import Foundation
 
-internal class FibonacciNode<Element: Equatable> {
-	typealias Node = FibonacciNode<Element>
+internal class FibonacciNode<Element: Equatable, Priority> {
+	typealias Node = FibonacciNode<Element, Priority>
 	
 	var key: Element
+	var priority: Priority
 	var parent: Node?
 	var child: Node?
 	var left: Node!
@@ -19,8 +20,9 @@ internal class FibonacciNode<Element: Equatable> {
 	var degree: Int
 	var marked: Bool
 	
-	required init(key: Element, parent: Node? = nil, child: Node? = nil, left: Node? = nil, right: Node? = nil, degree: Int = 0) {
+	required init(key: Element, priority: Priority, parent: Node? = nil, child: Node? = nil, left: Node? = nil, right: Node? = nil, degree: Int = 0) {
 		self.key = key
+		self.priority = priority
 		self.parent = parent
 		self.child = child
 		self.degree = degree

@@ -424,7 +424,7 @@ extension AVLTreeMap: CustomStringConvertible {
 extension AVLTreeMap: CustomDebugStringConvertible {
 	public var debugDescription: String {
 		get {
-			return "AVLTreeMap<count: \(count), startNodeKey: \(startNode?.key), endNodeKey: \(endNode?.key)>"
+			return "AVLTreeMap<count: \(count), startNodeKey: \(String(describing: startNode?.key)), endNodeKey: \(String(describing: endNode?.key))>"
 		}
 	}
 }
