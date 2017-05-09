@@ -271,6 +271,11 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 	}
 	
 	
+	/// Decreases the priority of the given element.
+	///
+	/// - Parameters:
+	///   - element: The element whose priority is to be decreased.
+	///   - priority: The new priority. Must be smaller than the previous one.
 	public func decreasePriority(of element: Element, to priority: Priority) {
 		if let node = handler[element] {
 			decreasePriority(of: node, to: priority)
@@ -327,6 +332,9 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 	}
 	
 	
+	/// Deletes the given element.
+	///
+	/// - Parameter element: The element to delete.
 	public func delete(_ element: Element) {
 		if let node = handler[element] {
 			delete(node: node)
@@ -348,6 +356,16 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 	}
 }
 
+public extension FibonacciHeap where Priority: Comparable {
+	/// Initializes the heap with the standard order if the Priority is Comparable.
+	///
+	/// - Parameter minimum: true if it's a minimum heap, false otherwise.
+	public convenience init(minimum: Bool = true) {
+		let comparator: (Priority, Priority) -> Bool = minimum ? { return $0 < $1 } : { return $0 > $1 }
+		self.init(comparator: comparator)
+	}
+}
+
 extension FibonacciHeap: CustomDebugStringConvertible {
 	public var debugDescription: String {
 		var string = "FibonacciHeap<count: \(count), contents:"
@@ -365,12 +383,5 @@ extension FibonacciHeap: CustomDebugStringConvertible {
 		}
 		string += ">"
 		return string
-	}
-}
-
-public extension FibonacciHeap where Priority: Comparable {
-	public convenience init(minimum: Bool = true) {
-		let comparator: (Priority, Priority) -> Bool = minimum ? { return $0 < $1 } : { return $0 > $1 }
-		self.init(comparator: comparator)
 	}
 }
