@@ -6,8 +6,6 @@
 //  Copyright © 2017 DeltaApps. All rights reserved.
 //
 
-// TODO: Repeating elements?
-
 import Foundation
 
 public class FibonacciHeap<Element: Hashable, Priority> {

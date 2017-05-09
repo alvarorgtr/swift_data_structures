@@ -20,19 +20,23 @@ class FibonacciHeapTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+	
+	private var pNumbers: [Int] = []
     
-    /* func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    */
+	var numbers: [Int] {
+		if pNumbers.count == 0 {
+			if let path = Bundle(for: FibonacciHeapTests.self).path(forResource: "random3000", ofType: "txt") {
+				do {
+					let contents = try String(contentsOfFile: path)
+					pNumbers = contents.components(separatedBy: CharacterSet.newlines).dropLast().map({ Int($0)! })
+				} catch {
+					fatalError("File could not be loaded for FibonacciHeap testing")
+				}
+			}
+		}
+		
+		return pNumbers
+	}
 	
 	func testCreation() {
 		let heap = FibonacciHeap<Int, Int>()
@@ -106,59 +110,70 @@ class FibonacciHeapTests: XCTestCase {
 	}
 	
 	func testBigRandomData() {
-		if let path = Bundle(for: FibonacciHeapTests.self).path(forResource: "random3000", ofType: "txt") {
-			do {
-				let contents = try String(contentsOfFile: path)
-				let numbers = contents.components(separatedBy: CharacterSet.newlines).dropLast().map({ Int($0)! })
+		// 6.080 sec (4% Std) for 6001 numbers
+		// sum_i=1^6001 log(i) = 9426
+		let heap = FibonacciHeap<Int, Int>()
+		self.insertAndRemoveAsserting(numbers, on: heap)
+		// ---
 				
-				// 6.080 sec (4% Std) for 6001 numbers
-				// sum_i=1^6001 log(i) = 9426
-				let heap = FibonacciHeap<Int, Int>()
-				self.insertAndRemoveAsserting(numbers, on: heap)
-				// ---
-				
-				let heap2 = FibonacciHeap<Int, Int>(comparator: { $0 > $1 })
-				self.insertAndRemoveAsserting(numbers, on: heap2)
-			} catch {
-				XCTFail("File parsing failed")
+		let heap2 = FibonacciHeap<Int, Int>(comparator: { $0 > $1 })
+		self.insertAndRemoveAsserting(numbers, on: heap2)
+	}
+	
+	func testUnion() {
+		let heap1 = FibonacciHeap<Int, Int>()
+		let heap2 = FibonacciHeap<Int, Int>()
+		
+		for i in 0..<numbers.count {
+			if i % 2 == 0 {
+				heap1.insert(i, with: i)
+			} else {
+				heap2.insert(i, with: i)
+			}
+		}
+		
+		let union = heap1.union(heap2)
+		XCTAssertEqual(union.count, numbers.count, "The union count is wrong")
+		
+		var lastExtracted: Int?
+		if !union.isEmpty {
+			lastExtracted = union.extractMinimum()
+		}
+		for _ in 0..<union.count {
+			if let extracted = union.extractMinimum() {
+				XCTAssertTrue(union.less(lastExtracted!, extracted), "We can't have extracted something smaller")
+				lastExtracted = extracted
 			}
 		}
 	}
 	
-	func testUnion() {
-		if let path = Bundle(for: FibonacciHeapTests.self).path(forResource: "random3000", ofType: "txt") {
-			do {
-				let contents = try String(contentsOfFile: path)
-				let numbers = contents.components(separatedBy: CharacterSet.newlines).dropLast().map({ Int($0)! })
-				
-				// 6.080 sec (4% Std) for 6001 numbers
-				// sum_i=1^6001 log(i) = 9426
-				let heap1 = FibonacciHeap<Int, Int>()
-				let heap2 = FibonacciHeap<Int, Int>()
-				
-				for i in 0..<numbers.count {
-					if i % 2 == 0 {
-						heap1.insert(i, with: i)
-					} else {
-						heap2.insert(i, with: i)
-					}
-				}
-				
-				let union = heap1.union(heap2)
-				XCTAssertEqual(union.count, numbers.count, "The unicon count is wrong")
-				
-				var lastExtracted: Int?
-				if !union.isEmpty {
-					lastExtracted = union.extractMinimum()
-				}
-				for _ in 0..<union.count {
-					if let extracted = union.extractMinimum() {
-						XCTAssertTrue(union.less(lastExtracted!, extracted), "We can't have extracted something smaller")
-						lastExtracted = extracted
-					}
-				}
-			} catch {
-				XCTFail("File parsing failed")
+	func testDecreasePriority() {
+		let heap = FibonacciHeap<Int, Int>()
+		for elem in numbers {
+			heap.insert(elem, with: elem)
+		}
+		
+		// Force reorder
+		let min = heap.extractMinimum()!
+		heap.insert(min, with: min)
+		
+		for (i, number) in numbers.reversed().enumerated() {
+			heap.decreasePriority(of: number, to: heap.priority(of: number)! - 100)
+			
+			if i % 100 == 0 {
+				// Force reorder
+				let (min, priority) = heap.extractMinimumAndPriority()!
+				heap.insert(min, with: priority)
+			}
+		}
+		
+		var lastPriority: Int?
+		lastPriority = heap.extractMinimumAndPriority()!.1
+		
+		for _ in 0..<heap.count {
+			if let priority = heap.extractMinimumAndPriority()?.1 {
+				XCTAssertTrue(heap.less(lastPriority!, priority), "We can't have extracted something smaller")
+				lastPriority = priority
 			}
 		}
 	}

@@ -92,11 +92,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "515539336.135023"
+            timestampString = "516025203.130733"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "consolidate()"
             landmarkType = "7">
          </BreakpointContent>
@@ -109,11 +109,11 @@
             condition = "count == 9"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "515539336.135023"
+            timestampString = "516025203.130733"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "consolidate()"
             landmarkType = "7">
          </BreakpointContent>
@@ -125,11 +125,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "515539336.135023"
+            timestampString = "516025203.130733"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
             landmarkName = "consolidate()"
             landmarkType = "7">
          </BreakpointContent>
@@ -141,11 +141,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "515539336.135023"
+            timestampString = "516025203.130733"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "consolidate()"
             landmarkType = "7">
          </BreakpointContent>
@@ -157,11 +157,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "515539336.135023"
+            timestampString = "516025203.130733"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "consolidate()"
             landmarkType = "7">
          </BreakpointContent>
@@ -173,11 +173,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "515539336.135023"
+            timestampString = "516025203.130733"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "extractMinimumAndPriority()"
             landmarkType = "7">
             <Locations>
@@ -231,61 +231,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "515539336.135023"
+            timestampString = "516025203.130733"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "extractMinimumAndPriority()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DataStructuresTests/FibonacciHeapTests.swift"
-            timestampString = "515160712.021195"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "testBigRandomData()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DataStructuresTests.FibonacciHeapTests.testBigRandomData () -&gt; ()"
-                  moduleName = "DataStructuresTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alvaro/Xcode%20Projects/swift_data_structures/DataStructuresTests/FibonacciHeapTests.swift"
-                  timestampString = "515160722.28738"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "110"
-                  endingLineNumber = "110"
-                  offsetFromSymbolStart = "871">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DataStructuresTests.FibonacciHeapTests.(testBigRandomData () -&gt; ()).(closure #1)"
-                  moduleName = "DataStructuresTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alvaro/Xcode%20Projects/swift_data_structures/DataStructuresTests/FibonacciHeapTests.swift"
-                  timestampString = "515160722.289693"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "110"
-                  endingLineNumber = "110"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
