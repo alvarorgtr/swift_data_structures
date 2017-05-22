@@ -339,6 +339,8 @@ final public class FibonacciHeap<Element: Hashable, Priority> {
 	}
 }
 
+
+// Private node manipulation methods
 extension FibonacciHeap {
 	fileprivate func add(_ node: Node, after left: Node) {
 		add(from: node, to: node, after: left)
@@ -365,6 +367,8 @@ extension FibonacciHeap {
 	}
 }
 
+
+// Use the default operator < when the priority is comparable
 public extension FibonacciHeap where Priority: Comparable {
 	/// Initializes the heap with the standard order if the Priority is Comparable.
 	///
@@ -375,6 +379,16 @@ public extension FibonacciHeap where Priority: Comparable {
 	}
 }
 
+
+// Use the default priority when inserting if the element is priorizable
+public extension FibonacciHeap where Element: Priorizable, Element.Priority == Priority {
+	public func insert(_ element: Element) {
+		insert(element, with: element.priority)
+	}
+}
+
+
+// Debug string description
 extension FibonacciHeap: CustomDebugStringConvertible {
 	public var debugDescription: String {
 		var string = "FibonacciHeap<count: \(count), contents:"

@@ -112,7 +112,7 @@ class FibonacciHeapTests: XCTestCase {
 	func testBigRandomData() {
 		let heap = FibonacciHeap<Int, Int>()
 		self.insertAndRemoveAsserting(numbers, on: heap)
-				
+		
 		let heap2 = FibonacciHeap<Int, Int>(comparator: { $0 > $1 })
 		self.insertAndRemoveAsserting(numbers, on: heap2)
 	}

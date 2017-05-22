@@ -62,7 +62,6 @@
 		383400761ED35A7C0035A552 /* Priorizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Priorizable.swift; sourceTree = "<group>"; };
 		384251841EB398E200EDE828 /* FibonacciHeap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FibonacciHeap.swift; sourceTree = "<group>"; };
 		384251861EB39B4600EDE828 /* FibonacciNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FibonacciNode.swift; sourceTree = "<group>"; };
-		384251881EB3BD4800EDE828 /* TestPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestPlayground.playground; sourceTree = "<group>"; };
 		384251891EB3D10600EDE828 /* FibonacciHeapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FibonacciHeapTests.swift; sourceTree = "<group>"; };
 		384BA6741EB4B8DD00385A3B /* random3000.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = random3000.txt; sourceTree = "<group>"; };
 		384F32C01E84391D00F2ED36 /* GraphCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCollection.swift; sourceTree = "<group>"; };
@@ -196,7 +195,6 @@
 		38B0D08B1D23F1A0004C04BE = {
 			isa = PBXGroup;
 			children = (
-				384251881EB3BD4800EDE828 /* TestPlayground.playground */,
 				38B0D0971D23F1A0004C04BE /* DataStructures */,
 				38B0D0A31D23F1A1004C04BE /* DataStructuresTests */,
 				38B0D0961D23F1A0004C04BE /* Products */,
