@@ -254,7 +254,8 @@ final public class FibonacciHeap<Element: Hashable, Priority> {
 	}
 	
 	
-	/// Decreases the priority of the given element.
+	/// Decreases the priority of the given element. If the priority doesn't exists, the node
+	/// is inserted with that priority.
 	///
 	/// - Parameters:
 	///   - element: The element whose priority is to be decreased.
@@ -263,7 +264,7 @@ final public class FibonacciHeap<Element: Hashable, Priority> {
 		if let node = handler[element] {
 			decreasePriority(of: node, to: priority)
 		} else {
-			fatalError("No such node")
+			insert(element, with: priority)
 		}
 	}
 	
