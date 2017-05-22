@@ -86,7 +86,7 @@ class FibonacciHeapTests: XCTestCase {
 		insertAndRemoveAsserting((0...200).reversed(), on: heap)
 		
 		let heap2 = FibonacciHeap<Int, Int>(comparator: { $0 > $1 })
-		insertAndRemoveAsserting(stride(from: -500, to: 500, by: 5), on: heap2)
+		self.insertAndRemoveAsserting(stride(from: -500, to: 500, by: 5), on: heap2)
 		
 		let heap3 = FibonacciHeap<Double, Double>()
 		insertAndRemoveAsserting((0...100).map({ pow(2, -0.2 * Double($0)) }), on: heap3)
@@ -110,11 +110,8 @@ class FibonacciHeapTests: XCTestCase {
 	}
 	
 	func testBigRandomData() {
-		// 6.080 sec (4% Std) for 6001 numbers
-		// sum_i=1^6001 log(i) = 9426
 		let heap = FibonacciHeap<Int, Int>()
 		self.insertAndRemoveAsserting(numbers, on: heap)
-		// ---
 				
 		let heap2 = FibonacciHeap<Int, Int>(comparator: { $0 > $1 })
 		self.insertAndRemoveAsserting(numbers, on: heap2)

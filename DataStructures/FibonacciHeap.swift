@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class FibonacciHeap<Element: Hashable, Priority> {
+final public class FibonacciHeap<Element: Hashable, Priority> {
 	fileprivate typealias Node = FibonacciNode<Element, Priority>
 	
 	let less: (Priority, Priority) -> Bool
@@ -52,10 +52,7 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 	
 	private func insert(node: Node) {
 		if let min = min {
-			node.left = min.left
-			node.right = min
-			node.left.right = node
-			min.left = node
+			add(node, after: min)
 			
 			if less(node.priority, min.priority) {
 				self.min = node
@@ -112,10 +109,7 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 		self.count = 0
 		heap2.count = 0
 		
-		min1.right.left = min2.left
-		min2.left.right = min1.right
-		min1.right = min2
-		min2.left = min1
+		add(from: min2, to: min2.left, after: min1)
 		
 		if less(min2.priority, min1.priority) {
 			heap.min = min2
@@ -147,16 +141,12 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 		if let min = min {
 			// Add every child to root list
 			if let child = min.child {
-				var node = child.right!
-				var next: Node?
-				addToRootList(child)
-				child.parent = nil
-			
-				while node !== child {
-					next = node.right
-					addToRootList(node)
+				add(from: child, to: child.left, after: min)
+				
+				var node: Node = min
+				while node != child.right {
+					node = node.right
 					node.parent = nil
-					node = next!
 				}
 			}
 			
@@ -164,7 +154,7 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 			min.left.right = min.right
 			min.right.left = min.left
 			
-			if min === min.right {
+			if min == min.right {
 				self.min = nil
 			} else {
 				self.min = min.right
@@ -179,32 +169,25 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 		return nil
 	}
 	
-	private func addToRootList(_ node: Node) {
-		precondition(min != nil)
-		node.right = min!.right
-		min!.right.left = node
-		min!.right = node
-		node.left = min!
-	}
-	
 	private func consolidate() {
-		var a = Array<Node?>(repeating: nil, count: count)
+		var a = Array<Node?>()
 		let root: Node = min!.right
 		
 		var queue: Queue<Node> = [root]
 		var node = root.right!
-		while node !== root {
+		while node != root {
 			queue.push(node)
 			node = node.right
 		}
-		
+
 		while let node = queue.pop() {
-			if node.parent != nil {		// We don't consider the nodes which have already been consolidated
-				continue
-			}
-			
 			var x = node
 			var d = node.degree
+			
+			// We fill the array to make sure we have enough place to fit all
+			while a.count <= d {
+				a.append(nil)
+			}
 			
 			while a[d] != nil {
 				var y = a[d]!
@@ -217,6 +200,11 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 				link(node: y, to: x)
 				a[d] = nil
 				d += 1
+				
+				// We fill the array to make sure we have enough place to fit all
+				if d >= a.count {
+					a.append(nil)
+				}
 			}
 			
 			a[d] = x
@@ -232,10 +220,7 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 					elem.left = elem
 					elem.right = elem
 				} else {
-					elem.left = head!.left
-					elem.right = head
-					head!.left.right = elem
-					head!.left = elem
+					add(elem, after: head!)
 				}
 				
 				if min == nil || less(elem.priority, min!.priority) {
@@ -298,7 +283,7 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 	}
 	
 	private func cut(_ x: Node, _ y: Node) {
-		if x.left !== x {
+		if x.left != x {
 			x.left.right = x.right
 			x.right.left = x.left
 			y.child = x.left
@@ -354,6 +339,32 @@ public class FibonacciHeap<Element: Hashable, Priority> {
 	}
 }
 
+extension FibonacciHeap {
+	fileprivate func add(_ node: Node, after left: Node) {
+		add(from: node, to: node, after: left)
+	}
+	
+	fileprivate func add(from: Node, to: Node, after left: Node) {
+		let right: Node = left.right
+		from.left = left
+		to.right = right
+		left.right = from
+		right.left = to
+	}
+	
+	fileprivate func remove(_ node: Node) {
+		let left: Node = node.left
+		let right: Node = node.right
+		
+		if let parent = node.parent {
+			parent.child = (node != left) ? left : nil
+		}
+		
+		left.right = right
+		right.left = left
+	}
+}
+
 public extension FibonacciHeap where Priority: Comparable {
 	/// Initializes the heap with the standard order if the Priority is Comparable.
 	///
@@ -372,7 +383,7 @@ extension FibonacciHeap: CustomDebugStringConvertible {
 			string += " \(node.debugDescription)"
 			node = node.right
 			
-			while node !== min {
+			while node != min {
 				string += " \(node.debugDescription)"
 				node = node.right
 			}

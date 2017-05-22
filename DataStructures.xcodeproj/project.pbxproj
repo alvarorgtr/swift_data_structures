@@ -10,6 +10,7 @@
 		3809EF5A1E4F7E8F00406001 /* BinaryTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3809EF591E4F7E8F00406001 /* BinaryTreeNode.swift */; };
 		3824FB7D1E4F557D007AFA7F /* TreeIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3824FB7C1E4F557D007AFA7F /* TreeIterator.swift */; };
 		3824FB7F1E4F5660007AFA7F /* DictionaryCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3824FB7E1E4F5660007AFA7F /* DictionaryCollection.swift */; };
+		383400771ED35A7C0035A552 /* Priorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383400761ED35A7C0035A552 /* Priorizable.swift */; };
 		384251851EB398E200EDE828 /* FibonacciHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384251841EB398E200EDE828 /* FibonacciHeap.swift */; };
 		384251871EB39B4600EDE828 /* FibonacciNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384251861EB39B4600EDE828 /* FibonacciNode.swift */; };
 		3842518A1EB3D10600EDE828 /* FibonacciHeapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384251891EB3D10600EDE828 /* FibonacciHeapTests.swift */; };
@@ -58,6 +59,7 @@
 		3809EF591E4F7E8F00406001 /* BinaryTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTreeNode.swift; sourceTree = "<group>"; };
 		3824FB7C1E4F557D007AFA7F /* TreeIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeIterator.swift; sourceTree = "<group>"; };
 		3824FB7E1E4F5660007AFA7F /* DictionaryCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryCollection.swift; sourceTree = "<group>"; };
+		383400761ED35A7C0035A552 /* Priorizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Priorizable.swift; sourceTree = "<group>"; };
 		384251841EB398E200EDE828 /* FibonacciHeap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FibonacciHeap.swift; sourceTree = "<group>"; };
 		384251861EB39B4600EDE828 /* FibonacciNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FibonacciNode.swift; sourceTree = "<group>"; };
 		384251881EB3BD4800EDE828 /* TestPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestPlayground.playground; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			children = (
 				384251841EB398E200EDE828 /* FibonacciHeap.swift */,
 				384251861EB39B4600EDE828 /* FibonacciNode.swift */,
+				383400761ED35A7C0035A552 /* Priorizable.swift */,
 			);
 			name = PriorityQueue;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				38A0AD381DC4ABD3005EA3CC /* List.swift in Sources */,
 				38D2482E1E12B1FF002C7C70 /* TreeMapCollection.swift in Sources */,
 				38D248311E12B7E4002C7C70 /* TreeNode.swift in Sources */,
+				383400771ED35A7C0035A552 /* Priorizable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

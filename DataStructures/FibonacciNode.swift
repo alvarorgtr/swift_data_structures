@@ -32,6 +32,12 @@ internal class FibonacciNode<Element: Equatable, Priority> {
 	}
 }
 
+extension FibonacciNode: Equatable {
+	static func ==<E: Equatable, P>(lhs: FibonacciNode<E, P>, rhs: FibonacciNode<E, P>) -> Bool {
+		return lhs.key == rhs.key
+	}
+}
+
 extension FibonacciNode: CustomDebugStringConvertible {
 	var debugDescription: String {
 		var string = "([\(key), \(priority)]"

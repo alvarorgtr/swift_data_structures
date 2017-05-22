@@ -92,11 +92,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "516025203.130733"
+            timestampString = "516900667.712847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "consolidate()"
             landmarkType = "7">
          </BreakpointContent>
@@ -109,11 +109,11 @@
             condition = "count == 9"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "516025203.130733"
+            timestampString = "516900667.712847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "consolidate()"
             landmarkType = "7">
          </BreakpointContent>
@@ -125,11 +125,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "516025203.130733"
+            timestampString = "516903600.987857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "consolidate()"
             landmarkType = "7">
          </BreakpointContent>
@@ -141,11 +141,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "516025203.130733"
+            timestampString = "516900667.712847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "consolidate()"
             landmarkType = "7">
          </BreakpointContent>
@@ -157,61 +157,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "516025203.130733"
+            timestampString = "516900667.712847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "consolidate()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "516025203.130733"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "extractMinimumAndPriority()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DataStructures.FibonacciHeap.extractMinimum () -&gt; Swift.Optional&lt;A&gt;"
-                  moduleName = "DataStructures"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alvaro/Xcode%20Projects/swift_data_structures/DataStructures/FibonacciHeap.swift"
-                  timestampString = "515116105.129885"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
-                  offsetFromSymbolStart = "161">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DataStructures.FibonacciHeap.extractMinimum () -&gt; Swift.Optional&lt;A&gt;"
-                  moduleName = "DataStructures"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alvaro/Xcode%20Projects/swift_data_structures/DataStructures/FibonacciHeap.swift"
-                  timestampString = "515116105.131526"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
-                  offsetFromSymbolStart = "215">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -231,11 +183,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataStructures/FibonacciHeap.swift"
-            timestampString = "516025203.130733"
+            timestampString = "516900667.712847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "extractMinimumAndPriority()"
             landmarkType = "7">
          </BreakpointContent>
