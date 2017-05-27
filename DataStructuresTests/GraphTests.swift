@@ -11,7 +11,7 @@ import Foundation
 @testable import DataStructures
 
 class GraphTests: XCTestCase {
-	var smallGraph: Graph<Int>!
+	var smallGraph: LabelledGraph<Int>!
 	
 	let smallGraphEdges = [(1,2), (2,3), (2,4), (4,1), (5,7), (6,7)]
 	var smallGraphMaxVertex: Int {
@@ -21,7 +21,7 @@ class GraphTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-		smallGraph = Graph<Int>(edges: smallGraphEdges)
+		smallGraph = LabelledGraph<Int>(edges: smallGraphEdges)
     }
     
     override func tearDown() {
@@ -72,7 +72,7 @@ class GraphTests: XCTestCase {
 	}
 	
 	func testAccessorsInStringGraph() {
-		let graph = Graph<String>(edges: smallGraphEdges.map { (String($0.0), String($0.1)) }.reversed())
+		let graph = LabelledGraph<String>(edges: smallGraphEdges.map { (String($0.0), String($0.1)) }.reversed())
 		
 		XCTAssertEqual(graph.degree(of: "1"), 2, "Wrong degree for vertex 1")
 		XCTAssertEqual(graph.degree(of: "4"), 2, "Wrong degree for vertex 4")
@@ -87,7 +87,7 @@ class GraphTests: XCTestCase {
 	}
 	
 	func testAdding() {
-		var graph = Graph<String>()
+		var graph = LabelledGraph<String>()
 		
 		graph.addEdge(from: "A", to: "C")
 		XCTAssertFalse(graph.isEmpty, "The graph is not empty")
@@ -110,21 +110,25 @@ class GraphTests: XCTestCase {
 	func testDFS() {
 		XCTAssertTrue(smallGraph.depthFirstSearched().elementsEqual([1,2,3,4,5,7,6]), "The DFS is not that")
 		
-		let graph2 = Graph<Int>(edges: [(1,2),(2,3),(3,4),(1,5),(5,6),(6,7),(5,8),(1,9),(9,10)])
+		let graph2 = LabelledGraph<Int>(edges: [(1,2),(2,3),(3,4),(1,5),(5,6),(6,7),(5,8),(1,9),(9,10)])
 		XCTAssertTrue(graph2.depthFirstSearched().elementsEqual(1...10), "The DFS is not that")
 	}
 	
 	func testBFS() {
 		XCTAssertTrue(smallGraph.breadthFirstSearched().elementsEqual([1,2,4,3,5,7,6]), "The BFS is not that")
 		
-		let stringGraph = Graph<String>(edges: [("A","E"), ("A","B"), ("A", "C"), ("A","G"), ("E","D"), ("E","F"), ("D", "F"), ("F", "G")])
+		let stringGraph = LabelledGraph<String>(edges: [("A","E"), ("A","B"), ("A", "C"), ("A","G"), ("E","D"), ("E","F"), ("D", "F"), ("F", "G")])
 		XCTAssertTrue(stringGraph.breadthFirstSearched().elementsEqual(["A", "E", "B", "C", "G", "D", "F"]), "The BFS is not that")
+	}
+	
+	func testDijkstra() {
+		// TODO
 	}
 }
 
 extension GraphTests {
-	fileprivate func parseIntGraph(from string: String) throws -> Graph<Int> {
-		var graph = Graph<Int>()
+	fileprivate func parseIntGraph(from string: String) throws -> LabelledGraph<Int> {
+		var graph = LabelledGraph<Int>()
 		var count = 1
 		
 		for line in string.components(separatedBy: CharacterSet.newlines).dropLast() {

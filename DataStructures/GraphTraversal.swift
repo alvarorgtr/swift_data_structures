@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Graph {
+extension LabelledGraph {
 	public func depthFirstSearched() -> AnySequence<Vertex> {
 		return AnySequence<Vertex>(makeDFSIterator())
 	}

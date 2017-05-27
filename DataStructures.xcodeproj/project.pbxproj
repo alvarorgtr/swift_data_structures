@@ -16,7 +16,7 @@
 		3842518A1EB3D10600EDE828 /* FibonacciHeapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384251891EB3D10600EDE828 /* FibonacciHeapTests.swift */; };
 		384BA6751EB4B8DD00385A3B /* random3000.txt in Resources */ = {isa = PBXBuildFile; fileRef = 384BA6741EB4B8DD00385A3B /* random3000.txt */; };
 		384F32C11E84391D00F2ED36 /* GraphCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C01E84391D00F2ED36 /* GraphCollection.swift */; };
-		384F32C31E843C7200F2ED36 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C21E843C7200F2ED36 /* Graph.swift */; };
+		384F32C31E843C7200F2ED36 /* LabelledGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C21E843C7200F2ED36 /* LabelledGraph.swift */; };
 		384F32C61E847E2100F2ED36 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C51E847E2100F2ED36 /* Queue.swift */; };
 		384F32C81E8481FA00F2ED36 /* GraphEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C71E8481FA00F2ED36 /* GraphEdge.swift */; };
 		384F32CA1E8486D500F2ED36 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F32C91E8486D500F2ED36 /* QueueTests.swift */; };
@@ -40,6 +40,8 @@
 		38B0D0B01D240121004C04BE /* DoublyLinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0AF1D240121004C04BE /* DoublyLinkedListTests.swift */; };
 		38B0D0B21D24012F004C04BE /* SinglyLinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0B11D24012F004C04BE /* SinglyLinkedListTests.swift */; };
 		38B0D0B61D24028B004C04BE /* StackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0D0B51D24028B004C04BE /* StackTests.swift */; };
+		38C2186D1EDA192100724E17 /* Dijkstra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C2186C1EDA192100724E17 /* Dijkstra.swift */; };
+		38C2186F1EDA1A0400724E17 /* WeightedDigraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C2186E1EDA1A0400724E17 /* WeightedDigraph.swift */; };
 		38D2482E1E12B1FF002C7C70 /* TreeMapCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D2482D1E12B1FF002C7C70 /* TreeMapCollection.swift */; };
 		38D248311E12B7E4002C7C70 /* TreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D248301E12B7E4002C7C70 /* TreeNode.swift */; };
 		38D248331E12BEF8002C7C70 /* TreeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D248321E12BEF8002C7C70 /* TreeIndex.swift */; };
@@ -65,7 +67,7 @@
 		384251891EB3D10600EDE828 /* FibonacciHeapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FibonacciHeapTests.swift; sourceTree = "<group>"; };
 		384BA6741EB4B8DD00385A3B /* random3000.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = random3000.txt; sourceTree = "<group>"; };
 		384F32C01E84391D00F2ED36 /* GraphCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCollection.swift; sourceTree = "<group>"; };
-		384F32C21E843C7200F2ED36 /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		384F32C21E843C7200F2ED36 /* LabelledGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelledGraph.swift; sourceTree = "<group>"; };
 		384F32C51E847E2100F2ED36 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		384F32C71E8481FA00F2ED36 /* GraphEdge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphEdge.swift; sourceTree = "<group>"; };
 		384F32C91E8486D500F2ED36 /* QueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
@@ -92,6 +94,8 @@
 		38B0D0AF1D240121004C04BE /* DoublyLinkedListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoublyLinkedListTests.swift; sourceTree = "<group>"; };
 		38B0D0B11D24012F004C04BE /* SinglyLinkedListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglyLinkedListTests.swift; sourceTree = "<group>"; };
 		38B0D0B51D24028B004C04BE /* StackTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackTests.swift; sourceTree = "<group>"; };
+		38C2186C1EDA192100724E17 /* Dijkstra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dijkstra.swift; sourceTree = "<group>"; };
+		38C2186E1EDA1A0400724E17 /* WeightedDigraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightedDigraph.swift; sourceTree = "<group>"; };
 		38D2482D1E12B1FF002C7C70 /* TreeMapCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeMapCollection.swift; sourceTree = "<group>"; };
 		38D248301E12B7E4002C7C70 /* TreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeNode.swift; sourceTree = "<group>"; };
 		38D248321E12BEF8002C7C70 /* TreeIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeIndex.swift; sourceTree = "<group>"; };
@@ -130,7 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				384F32C01E84391D00F2ED36 /* GraphCollection.swift */,
-				384F32C21E843C7200F2ED36 /* Graph.swift */,
+				38C2186E1EDA1A0400724E17 /* WeightedDigraph.swift */,
+				384F32C21E843C7200F2ED36 /* LabelledGraph.swift */,
 				384F32C71E8481FA00F2ED36 /* GraphEdge.swift */,
 				38A078091E955C6900329E96 /* GraphTraversal.swift */,
 			);
@@ -223,6 +228,7 @@
 				38A0AD241DC4AAF1005EA3CC /* AVLTreeMap */,
 				38D2482C1E12B1E3002C7C70 /* TreeCollection */,
 				384F32BE1E8436BD00F2ED36 /* Graphs */,
+				38C2186B1EDA18E200724E17 /* Algorithms */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -242,6 +248,14 @@
 				386344751E8FBB57000D3970 /* Resources */,
 			);
 			path = DataStructuresTests;
+			sourceTree = "<group>";
+		};
+		38C2186B1EDA18E200724E17 /* Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				38C2186C1EDA192100724E17 /* Dijkstra.swift */,
+			);
+			name = Algorithms;
 			sourceTree = "<group>";
 		};
 		38D2482C1E12B1E3002C7C70 /* TreeCollection */ = {
@@ -375,15 +389,17 @@
 				384F32C81E8481FA00F2ED36 /* GraphEdge.swift in Sources */,
 				3824FB7D1E4F557D007AFA7F /* TreeIterator.swift in Sources */,
 				38D248331E12BEF8002C7C70 /* TreeIndex.swift in Sources */,
+				38C2186D1EDA192100724E17 /* Dijkstra.swift in Sources */,
 				384F32C61E847E2100F2ED36 /* Queue.swift in Sources */,
 				38A0AD2B1DC4AAF1005EA3CC /* AVLTreeMap.swift in Sources */,
 				38A0AD3E1DC4AF21005EA3CC /* ListIndex.swift in Sources */,
 				3824FB7F1E4F5660007AFA7F /* DictionaryCollection.swift in Sources */,
-				384F32C31E843C7200F2ED36 /* Graph.swift in Sources */,
+				384F32C31E843C7200F2ED36 /* LabelledGraph.swift in Sources */,
 				38A0AD2A1DC4AAF1005EA3CC /* AVLTreeIterator.swift in Sources */,
 				38A0AD3C1DC4AF1A005EA3CC /* ListNode.swift in Sources */,
 				38A0AD3A1DC4ABD3005EA3CC /* Stack.swift in Sources */,
 				38A0780A1E955C6900329E96 /* GraphTraversal.swift in Sources */,
+				38C2186F1EDA1A0400724E17 /* WeightedDigraph.swift in Sources */,
 				384251871EB39B4600EDE828 /* FibonacciNode.swift in Sources */,
 				38A0AD391DC4ABD3005EA3CC /* SinglyLinkedList.swift in Sources */,
 				3809EF5A1E4F7E8F00406001 /* BinaryTreeNode.swift in Sources */,

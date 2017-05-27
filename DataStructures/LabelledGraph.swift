@@ -17,7 +17,7 @@ For the label management we are using the Sedgewick et al. implementation.
 
 Possible anomalies: parallel edges, self-loops
 */
-public struct Graph<Label: Hashable> {
+public struct LabelledGraph<Label: Hashable> {
 	public typealias Vertex = Label
 	public typealias Edge = GraphEdge<Int>
 	
@@ -25,7 +25,7 @@ public struct Graph<Label: Hashable> {
 	internal var vertices: [Vertex]
 	internal var keys: [Vertex: Int]
 	
-	public var edgeCount: Int = 0
+	public private(set) var edgeCount: Int = 0
 	
 	public var vertexCount: Int {
 		return vertices.count
@@ -144,7 +144,7 @@ public struct Graph<Label: Hashable> {
 	}
 }
 
-extension Graph: GraphCollection {
+extension LabelledGraph: GraphCollection {
 	public typealias Element = Label
 
 	public typealias Index = Int
@@ -158,18 +158,4 @@ extension Graph: GraphCollection {
 		precondition(keys[vertex] != nil, "The vertex doesn't exist")
 		return keys[vertex]!
 	}
-}
-
-public struct GraphEdge<Label: Equatable>: GraphEdgeProtocol {
-	public var from: Label
-	public var to: Label
-	
-	public init(from: Label, to: Label) {
-		self.from = from
-		self.to = to
-	}
-}
-
-public func ==<Label: Equatable>(lhs: GraphEdge<Label>, rhs: GraphEdge<Label>) -> Bool {
-	return (lhs.from == rhs.from && lhs.to == rhs.to) || (lhs.from == rhs.to && lhs.to == rhs.from)
 }
