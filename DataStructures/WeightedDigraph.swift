@@ -17,15 +17,13 @@ struct WeightedDigraph<Weight: Comparable> {
 	public var edgeCount: Int = 0
 	public private(set) var vertexCount: Int
 	
-	init<E: Sequence>(vertexCount: Int, edges: E? = nil) where E.Iterator.Element == Edge {
+	init<E: Sequence>(vertexCount: Int, edges: E) where E.Iterator.Element == Edge {
 		self.vertexCount = vertexCount
 		self.edges = Array(repeating: List<Edge>(), count: vertexCount)
 		
-		if let edges = edges {
-			for edge in edges {
-				if edge.from < vertexCount && edge.to < vertexCount {
-					add(edge: edge)
-				}
+		for edge in edges {
+			if edge.from < vertexCount && edge.to < vertexCount {
+				add(edge: edge)
 			}
 		}
 	}
