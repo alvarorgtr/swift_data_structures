@@ -122,7 +122,21 @@ class GraphTests: XCTestCase {
 	}
 	
 	func testDijkstra() {
-		// TODO
+		let a = [0, 0, 1, 1, 2, 3, 3, 3, 4, 4]
+		let b = [1, 3, 2, 3, 4, 1, 2, 4, 0, 2]
+		let w = [10, 5, 1, 3, 6, 2, 9, 2, 7, 4]
+		let edges = zip(zip(a, b), w).map { (points, weight) in
+			return DirectedWeightedGraphEdge<Int, Double>(from: points.0, to: points.1, weight: Double(weight))
+		}
+		let graph = WeightedDigraph<Double>(vertexCount: 5, edges: edges)
+		
+		let dijkstra = Dijkstra()
+		dijkstra.computeShortestPaths(on: graph, startingFrom: 1)
+		
+		let results = (0...4).map({ dijkstra.lenghtOfShortestPath(to: $0) })
+		for pair in zip([12.0, 0.0, 1.0, 3.0, 5.0], results) {
+			XCTAssertEqual(pair.0, pair.1, "Unexpected shortest path lenght!")
+		}
 	}
 }
 

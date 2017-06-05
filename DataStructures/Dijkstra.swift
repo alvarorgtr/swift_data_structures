@@ -15,6 +15,12 @@ public class Dijkstra {
 	private var distTo: [Double] = []
 	private var pq = FibonacciHeap<Int, Double>()
 	
+	// ACCESSORS
+	func lenghtOfShortestPath(to v: Int) -> Double {
+		return distTo[v]
+	}
+	
+	// DIJKSTRA
 	func computeShortestPaths(on graph: WeightedDigraph<Double>, startingFrom s: Int) {
 		self.edgeTo = [Edge?](repeating: nil, count: graph.vertexCount)
 		self.distTo = [Double](repeating: Double.infinity, count: graph.vertexCount)
@@ -38,7 +44,7 @@ public class Dijkstra {
 			distTo[w] = distTo[v] + e.weight
 			edgeTo[w] = e
 			
-			pq.decreasePriority(of: w, to: distTo[w])	// Automagically inserts if the node isn't already there
+			pq.decreasePriority(of: w, to: distTo[w])	// Automagically inserts the node if it isn't already there
 		}
 	}
 }
